@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI English Tutor Platform - Master English + Competitive Exams</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4F46E5;
+            --secondary: #EC4899;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --bg: #0F172A;
+            --card: #1E293B;
+            --text: #F1F5F9;
+            --text-muted: #94A3B8;
+            --border: #334155;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ===== LANDING PAGE STYLES ===== */
+        
+        .landing-page {
+            display: block;
+        }
+
+        .landing-page.hidden {
+            display: none;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--card);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.3em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* BUTTONS */
+        button {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+        }
+
+        .btn-large {
+            padding: 15px 40px;
+            font-size: 1.1em;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            margin-top: 70px;
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat {
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 12px;
+            background-color: rgba(79, 70, 229, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(236, 72, 153, 0.1));
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 1.2em;
+            color: var(--text-muted);
+        }
+
+        /* FEATURES SECTION */
+        .features {
+            padding: 100px 20px;
+            background-color: rgba(79, 70, 229, 0.05);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95em;
+        }
+
+        /* PRICING SECTION */
+        .pricing {
+            padding: 100px 20px;
+            background-color: rgba(79, 70, 229, 0.05);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pricing h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 60px;
+        }
+
+        .pricing-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .pricing-card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 16px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--primary);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(79, 70, 229, 0.3);
+            transform: scale(1.05);
+        }
+
+        .pricing-card .badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .price span {
+            font-size: 0.5em;
+            color: var(--text-muted);
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .pricing-card button {
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        /* FOOTER */
+        .footer {
+            background-color: var(--card);
+            border-top: 1px solid var(--border);
+            padding: 60px 20px 20px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+
+        /* ===== DASHBOARD STYLES ===== */
+
+        .dashboard-page {
+            display: none;
+        }
+
+        .dashboard-page.active {
+            display: flex;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: var(--card);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            z-index: 999;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.3em;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.85em;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .menu-item {
+            padding: 12px 20px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--text);
+        }
+
+        .menu-item.active {
+            background-color: rgba(79, 70, 229, 0.2);
+            color: var(--primary);
+            border-left-color: var(--primary);
+        }
+
+        .logout-btn {
+            margin: 20px;
+            width: calc(100% - 40px);
+            background-color: var(--danger);
+        }
+
+        .logout-btn:hover {
+            background-color: #DC2626;
+        }
+
+        .dashboard-navbar {
+            background-color: var(--card);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 30px;
+            position: fixed;
+            top: 0;
+            left: 250px;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            z-index: 100;
+        }
+
+        .dashboard-navbar h2 {
+            font-size: 1.5em;
+        }
+
+        .dashboard-container {
+            margin-top: 70px;
+            margin-left: 250px;
+            padding: 30px;
+            flex: 1;
+            width: calc(100% - 250px);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header h1 {
+            font-size: 2em;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 16px;
+            background: var(--card);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -17px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.2);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s;
+        }
+
+        .exam-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .exam-card {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(236, 72, 153, 0.1));
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .exam-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.3);
+        }
+
+        .exam-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .exam-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .exam-details {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .exam-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat-badge {
+            background-color: rgba(79, 70, 229, 0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .language-selector {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .language-selector h3 {
+            margin-bottom: 15px;
+        }
+
+        .language-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .language-btn {
+            padding: 10px 20px;
+            background-color: var(--border);
+            border: 2px solid var(--border);
+            color: var(--text-muted);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .language-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .language-btn.active {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .syllabus-section {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .syllabus-section h4 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .chapter-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .chapter-item {
+            background-color: rgba(79, 70, 229, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chapter-item:hover {
+            background-color: rgba(79, 70, 229, 0.2);
+            transform: translateX(5px);
+        }
+
+        .chapter-item h5 {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .chapter-stats {
+            display: flex;
+            gap: 10px;
+            font-size: 0.8em;
+            color: var(--text-muted);
+        }
+
+        .previous-papers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .paper-card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .paper-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.2);
+        }
+
+        .paper-year {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .paper-info {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .paper-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .paper-buttons button {
+            flex: 1;
+            padding: 8px 12px;
+            font-size: 0.9em;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .book-card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.2);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        .book-info {
+            padding: 15px;
+        }
+
+        .book-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1em;
+        }
+
+        .book-author {
+            color: var(--text-muted);
+            font-size: 0.8em;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background-color: rgba(79, 70, 229, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.9em;
+        }
+
+        input, select {
+            padding: 10px;
+            border: 2px solid var(--border);
+            background-color: var(--card);
+            color: var(--text);
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .auth-modal.active {
+            display: flex;
+        }
+
+        .auth-form {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .auth-form h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+        }
+
+        .auth-form button {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-muted);
+        }
+
+        .auth-toggle button {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 0;
+        }
+
+        .close-modal {
+            float: right;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .close-modal:hover {
+            color: var(--text);
+        }
+
+        .settings-btn {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .settings-btn:hover {
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 50px 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2em;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+            }
+
+            .dashboard-container {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .dashboard-navbar {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== LANDING PAGE ===== -->
+    <div class="landing-page" id="landingPage">
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">📚 AI English Tutor + Exams</div>
+                <div class="nav-menu">
+                    <a class="nav-link" onclick="scrollTo('#features')">Features</a>
+                    <a class="nav-link" onclick="scrollTo('#pricing')">Pricing</a>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn-secondary" onclick="showAuthModal('login')">Sign In</button>
+                    <button class="btn-primary" onclick="showAuthModal('signup')">Get Started</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Master English + Ace Competitive Exams</h1>
+                <p>Learn English in your native language (Hindi, Arabic, Urdu) with AI tutors. Plus prepare for competitive exams with full syllabus coverage and 10 years of previous papers!</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary btn-large" onclick="showAuthModal('signup')">Start Free Trial</button>
+                    <button class="btn-secondary btn-large">Watch Demo</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Students</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Languages</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Exams</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">4.9/5</div>
+                        <div class="stat-label">Rating</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-placeholder">
+                    <div style="font-size: 4em; margin-bottom: 10px;">🌍🎧📚📝✅</div>
+                    <div>Multi-Language + Exam Prep</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES SECTION -->
+        <section id="features" class="features">
+            <h2>Complete Learning Platform</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Multi-Language AI Tutors</h3>
+                    <p>Learn English through Hinglish, Arabic-English, or Urdu-English with native speakers</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>500+ Books</h3>
+                    <p>Read books at your level with vocabulary and comprehension practice</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎧</div>
+                    <h3>300+ Audiobooks</h3>
+                    <p>Listen to audiobooks with speed and volume control</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎤</div>
+                    <h3>AI Voice Practice</h3>
+                    <p>Practice speaking in your native language with real-time feedback</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Complete Exam Prep</h3>
+                    <p>Medical, SSC, UPSC, JEE, Management exams with full syllabus coverage</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>10 Years Papers</h3>
+                    <p>All previous 10 years exam papers with detailed solutions</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📹</div>
+                    <h3>Video Tutoring</h3>
+                    <p>1-on-1 sessions with certified tutors</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Smart Analytics</h3>
+                    <p>Track progress and get personalized recommendations</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING SECTION -->
+        <section id="pricing" class="pricing">
+            <h2>Choose Your Plan</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">$0<span>/month</span></div>
+                    <ul class="features-list">
+                        <li>✅ 5 books</li>
+                        <li>✅ Basic vocabulary</li>
+                        <li>✅ Practice papers</li>
+                        <li>❌ AI voice tutor</li>
+                        <li>❌ Audiobooks</li>
+                        <li>❌ Video tutoring</li>
+                    </ul>
+                    <button class="btn-secondary" onclick="showAuthModal('signup')">Get Started</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="badge">Most Popular</div>
+                    <h3>Premium</h3>
+                    <div class="price">$19<span>/month</span></div>
+                    <ul class="features-list">
+                        <li>✅ Everything Free +</li>
+                        <li>✅ 500+ books & audiobooks</li>
+                        <li>✅ AI voice tutoring</li>
+                        <li>✅ Multi-language support</li>
+                        <li>✅ All exam papers</li>
+                        <li>❌ Video tutoring</li>
+                    </ul>
+                    <button class="btn-primary" onclick="showAuthModal('signup')">Start Free Trial</button>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Pro</h3>
+                    <div class="price">$49<span>/month</span></div>
+                    <ul class="features-list">
+                        <li>✅ Everything Premium +</li>
+                        <li>✅ Unlimited video sessions</li>
+                        <li>✅ Priority tutors</li>
+                        <li>✅ Custom learning plan</li>
+                        <li>✅ Certificate</li>
+                        <li>✅ 24/7 support</li>
+                    </ul>
+                    <button class="btn-secondary" onclick="showAuthModal('signup')">Start Free Trial</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a onclick="scrollTo('#features')">Features</a></li>
+                        <li><a onclick="scrollTo('#pricing')">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AI English Tutor Platform. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ===== DASHBOARD PAGE ===== -->
+    <div class="dashboard-page" id="dashboardPage">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>📚 AI Tutor</h1>
+                <p>English + Exams</p>
+            </div>
+            <div class="sidebar-menu">
+                <div class="menu-item active" onclick="switchTab('dashboard')">📊 Dashboard</div>
+                <div class="menu-item" onclick="switchTab('languages')">🌍 Languages</div>
+                <div class="menu-item" onclick="switchTab('books')">📚 Books</div>
+                <div class="menu-item" onclick="switchTab('voice')">🎤 Voice Tutor</div>
+                <div class="menu-item" onclick="switchTab('exams')">📝 Competitive Exams</div>
+                <div class="menu-item" onclick="switchTab('medical')">🏥 Medical Exams</div>
+                <div class="menu-item" onclick="switchTab('ssc')">👮 SSC Exams</div>
+                <div class="menu-item" onclick="switchTab('upsc')">🏛️ UPSC Exams</div>
+                <div class="menu-item" onclick="switchTab('jee')">📐 JEE Exams</div>
+                <div class="menu-item" onclick="switchTab('management')">💼 Management Exams</div>
+                <div class="menu-item" onclick="switchTab('progress')">📊 Progress</div>
+            </div>
+            <button class="btn-secondary logout-btn" onclick="logout()">🚪 Logout</button>
+        </div>
+
+        <div class="dashboard-navbar">
+            <h2 id="pageTitle">Dashboard</h2>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <button class="settings-btn" onclick="openSettings()">⚙️ Settings</button>
+                <div class="user-profile">
+                    <div class="avatar">JS</div>
+                    <div>
+                        <div style="font-weight: 600;">John Smith</div>
+                        <div style="font-size: 0.85em; color: var(--text-muted);">B2 Level</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-container">
+
+            <!-- TAB 1: DASHBOARD -->
+            <div id="dashboard" class="tab-content active">
+                <div class="header">
+                    <h1>Welcome Back!</h1>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>📚 Books Read</h3>
+                        <div class="stat-value">7</div>
+                        <div class="stat-label">This month</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎤 Voice Sessions</h3>
+                        <div class="stat-value">28</div>
+                        <div class="stat-label">Completed</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>📝 Exam Papers Done</h3>
+                        <div class="stat-value">45</div>
+                        <div class="stat-label">This month</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>📊 English Level</h3>
+                        <div class="stat-value">B2</div>
+                        <div class="stat-label">Upper Intermediate</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 62%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 style="margin: 40px 0 20px 0;">Quick Actions</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>📝 Start Exam Prep</h3>
+                        <div class="stat-label" style="margin-bottom: 15px;">Choose any exam below</div>
+                        <button class="btn-primary">Browse Exams</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎤 Practice Speaking</h3>
+                        <div class="stat-label" style="margin-bottom: 15px;">Practice with AI</div>
+                        <button class="btn-primary">Start Session</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>📚 Read a Book</h3>
+                        <div class="stat-label" style="margin-bottom: 15px;">Continue reading</div>
+                        <button class="btn-primary">Go to Books</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>🌍 Change Language</h3>
+                        <div class="stat-label" style="margin-bottom: 15px;">Current: English</div>
+                        <button class="btn-primary">Select Language</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: LANGUAGES -->
+            <div id="languages" class="tab-content">
+                <h2 style="margin-bottom: 30px;">🌍 Learn English in Your Language</h2>
+
+                <div class="language-selector">
+                    <h3>Select Your Learning Language</h3>
+                    <div class="language-buttons">
+                        <button class="language-btn active" onclick="selectLanguage('english')">🇬🇧 English Only</button>
+                        <button class="language-btn" onclick="selectLanguage('hinglish')">🇮🇳 Hinglish (Hindi + English)</button>
+                        <button class="language-btn" onclick="selectLanguage('arabic')">🇸🇦 Arabic + English</button>
+                        <button class="language-btn" onclick="selectLanguage('urdu')">🇵🇰 Urdu + English</button>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>🇬🇧 English Only</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 15px;">Pure English learning with English explanations. Best for intermediate+ learners.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 40%;"></div>
+                        </div>
+                        <div style="color: var(--text-muted); font-size: 0.9em; margin-top: 10px;">12 speaking sessions, 5 books</div>
+                        <button class="btn-secondary" style="margin-top: 15px;">Currently Selected</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>🇮🇳 Hinglish Mode</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 15px;">Learn English with Hindi explanations and examples. Perfect for Hindi speakers.</p>
+                        <ul style="color: var(--text-muted); font-size: 0.9em; margin-bottom: 15px; padding-left: 20px;">
+                            <li>✅ Hindi explanations</li>
+                            <li>✅ Hindi examples</li>
+                            <li>✅ Hindi subtitles</li>
+                        </ul>
+                        <button class="btn-primary">Activate Hinglish</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>🇸🇦 Arabic + English</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 15px;">Learn English with Arabic explanations and context for Arab learners.</p>
+                        <ul style="color: var(--text-muted); font-size: 0.9em; margin-bottom: 15px; padding-left: 20px;">
+                            <li>✅ Arabic explanations</li>
+                            <li>✅ Arabic examples</li>
+                            <li>✅ Arabic subtitles</li>
+                        </ul>
+                        <button class="btn-primary">Activate Arabic Mode</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>🇵🇰 Urdu + English</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 15px;">Learn English with Urdu explanations for Pakistani and Urdu speakers.</p>
+                        <ul style="color: var(--text-muted); font-size: 0.9em; margin-bottom: 15px; padding-left: 20px;">
+                            <li>✅ Urdu explanations</li>
+                            <li>✅ Urdu examples</li>
+                            <li>✅ Urdu subtitles</li>
+                        </ul>
+                        <button class="btn-primary">Activate Urdu Mode</button>
+                    </div>
+                </div>
+
+                <h2 style="margin: 40px 0 20px 0;">📊 Language Learning Stats</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Total Sessions</h3>
+                        <div class="stat-value">28</div>
+                        <div class="stat-label">All languages</div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Accuracy Rate</h3>
+                        <div class="stat-value">85%</div>
+                        <div class="stat-label">Current average</div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Improvement</h3>
+                        <div class="stat-value">+12%</div>
+                        <div class="stat-label">This month</div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Streak</h3>
+                        <div class="stat-value">27</div>
+                        <div class="stat-label">Days</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: BOOKS -->
+            <div id="books" class="tab-content">
+                <h2 style="margin-bottom: 20px;">📚 Books Library</h2>
+
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" placeholder="Search books...">
+                    </div>
+                    <div class="filter-group">
+                        <label>Level</label>
+                        <select>
+                            <option>All Levels</option>
+                            <option>A1 - Beginner</option>
+                            <option>A2 - Elementary</option>
+                            <option>B1 - Intermediate</option>
+                            <option>B2 - Upper Intermediate</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="books-grid">
+                    <div class="book-card">
+                        <div class="book-cover">📖</div>
+                        <div class="book-info">
+                            <div class="book-title">The Little Prince</div>
+                            <div class="book-author">Saint-Exupéry</div>
+                            <div>
+                                <span class="badge">45K words</span>
+                                <span class="badge">A2</span>
+                            </div>
+                            <button class="btn-primary">Read</button>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover">📕</div>
+                        <div class="book-info">
+                            <div class="book-title">Charlotte's Web</div>
+                            <div class="book-author">E.B. White</div>
+                            <div>
+                                <span class="badge">76K words</span>
+                                <span class="badge">B1</span>
+                            </div>
+                            <button class="btn-primary">Read</button>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover">📗</div>
+                        <div class="book-info">
+                            <div class="book-title">Business English</div>
+                            <div class="book-author">Cambridge</div>
+                            <div>
+                                <span class="badge">50K words</span>
+                                <span class="badge">B2</span>
+                            </div>
+                            <button class="btn-primary">Read</button>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover">📙</div>
+                        <div class="book-info">
+                            <div class="book-title">Science Simplified</div>
+                            <div class="book-author">Hawking</div>
+                            <div>
+                                <span class="badge">120K words</span>
+                                <span class="badge">C1</span>
+                            </div>
+                            <button class="btn-primary">Read</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: VOICE TUTOR -->
+            <div id="voice" class="tab-content">
+                <h2 style="margin-bottom: 30px;">🎤 AI Voice Tutoring</h2>
+
+                <div class="language-selector">
+                    <h3>Voice Practice Language</h3>
+                    <div class="language-buttons">
+                        <button class="language-btn active">🇬🇧 English</button>
+                        <button class="language-btn" onclick="alert('Hinglish mode activated!')">🇮🇳 Hinglish</button>
+                        <button class="language-btn" onclick="alert('Arabic mode activated!')">🇸🇦 Arabic</button>
+                        <button class="language-btn" onclick="alert('Urdu mode activated!')">🇵🇰 Urdu</button>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>🎤 Start Session</h3>
+                        <div class="stat-label" style="margin-bottom: 15px;">Practice speaking</div>
+                        <button class="btn-primary" onclick="alert('Starting voice session in selected language...')">Start Now</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>📊 Last Session</h3>
+                        <div class="stat-value">85%</div>
+                        <div class="stat-label">Accuracy</div>
+                    </div>
+
+                    <div class="card">
+                        <h3>📈 This Week</h3>
+                        <div class="stat-value">5/7</div>
+                        <div class="stat-label">Sessions</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 71%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🏆 Best Score</h3>
+                        <div class="stat-value">92%</div>
+                        <div class="stat-label">All time</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: ALL EXAMS -->
+            <div id="exams" class="tab-content">
+                <h2 style="margin-bottom: 30px;">📝 All Competitive Exams</h2>
+
+                <div class="exam-category-grid">
+                    <div class="exam-card" onclick="switchTab('medical')">
+                        <div class="exam-icon">🏥</div>
+                        <h3>Medical Exams</h3>
+                        <div class="exam-details">NEET, AIIMS, JIPMER</div>
+                        <div class="exam-stats">
+                            <span class="stat-badge">2000+ Questions</span>
+                            <span class="stat-badge">10 Years Papers</span>
+                        </div>
+                        <button class="btn-primary">Start Prep</button>
+                    </div>
+
+                    <div class="exam-card" onclick="switchTab('ssc')">
+                        <div class="exam-icon">👮</div>
+                        <h3>SSC Exams</h3>
+                        <div class="exam-details">CGL, CHSL, MTS, GD</div>
+                        <div class="exam-stats">
+                            <span class="stat-badge">3000+ Questions</span>
+                            <span class="stat-badge">10 Years Papers</span>
+                        </div>
+                        <button class="btn-primary">Start Prep</button>
+                    </div>
+
+                    <div class="exam-card" onclick="switchTab('upsc')">
+                        <div class="exam-icon">🏛️</div>
+                        <h3>UPSC Exams</h3>
+                        <div class="exam-details">IAS, IFS, IPS</div>
+                        <div class="exam-stats">
+                            <span class="stat-badge">5000+ Questions</span>
+                            <span class="stat-badge">10 Years Papers</span>
+                        </div>
+                        <button class="btn-primary">Start Prep</button>
+                    </div>
+
+                    <div class="exam-card" onclick="switchTab('jee')">
+                        <div class="exam-icon">📐</div>
+                        <h3>JEE Exams</h3>
+                        <div class="exam-details">JEE Main, JEE Advanced</div>
+                        <div class="exam-stats">
+                            <span class="stat-badge">2500+ Questions</span>
+                            <span class="stat-badge">10 Years Papers</span>
+                        </div>
+                        <button class="btn-primary">Start Prep</button>
+                    </div>
+
+                    <div class="exam-card" onclick="switchTab('management')">
+                        <div class="exam-icon">💼</div>
+                        <h3>Management Exams</h3>
+                        <div class="exam-details">CAT, XAT, SNAP, NMAT</div>
+                        <div class="exam-stats">
+                            <span class="stat-badge">2000+ Questions</span>
+                            <span class="stat-badge">10 Years Papers</span>
+                        </div>
+                        <button class="btn-primary">Start Prep</button>
+                    </div>
+
+                    <div class="exam-card">
+                        <div class="exam-icon">⭐</div>
+                        <h3>Coming Soon</h3>
+                        <div class="exam-details">Bank Exams, Railways</div>
+                        <div class="exam-stats">
+                            <span class="stat-badge">Stay Tuned</span>
+                        </div>
+                        <button class="btn-secondary">Notify Me</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 6: MEDICAL EXAMS -->
+            <div id="medical" class="tab-content">
+                <h2 style="margin-bottom: 30px;">🏥 Medical Exam Preparation</h2>
+
+                <div style="display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
+                    <div class="card" style="flex: 1; min-width: 200px;">
+                        <h3>NEET</h3>
+                        <div class="stat-value" style="font-size: 1.5em;">2024</div>
+                        <div class="stat-label">Latest Exam</div>
+                    </div>
+                    <div class="card" style="flex: 1; min-width: 200px;">
+                        <h3>Questions</h3>
+                        <div class="stat-value">500+</div>
+                        <div class="stat-label">Practice questions</div>
+                    </div>
+                    <div class="card" style="flex: 1; min-width: 200px;">
+                        <h3>Topics</h3>
+                        <div class="stat-value">150+</div>
+                        <div class="stat-label">All subjects</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 20px;">📚 Syllabus-Wise Practice Papers</h3>
+                <div class="syllabus-section">
+                    <h4>Biology</h4>
+                    <div class="chapter-list">
+                        <div class="chapter-item">
+                            <h5>Cell Biology</h5>
+                            <div class="chapter-stats">
+                                <span>50 Questions</span>
+                                <span>|</span>
+                                <span>✅ Completed</span>
+                            </div>
+                        </div>
+                        <div class="chapter-item">
+                            <h5>Genetics</h5>
+                            <div class="chapter-stats">
+                                <span>45 Questions</span>
+                                <span>|</span>
+                                <span>📊 In Progress</span>
+                            </div>
+                        </div>
+                        <div class="chapter-item">
+                            <h5>Ecology</h5>
+                            <div class="chapter-stats">
+                                <span>40 Questions</span>
+                                <span>|</span>
+                                <span>⏳ Not Started</span>
+                            </div>
+                        </div>
+                        <div class="chapter-item">
+                            <h5>Human Physiology</h5>
+                            <div class="chapter-stats">
+                                <span>55 Questions</span>
+                                <span>|</span>
+                                <span>⏳ Not Started</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syllabus-section">
+                    <h4>Chemistry</h4>
+                    <div class="chapter-list">
+                        <div class="chapter-item">
+                            <h5>Organic Chemistry</h5>
+                            <div class="chapter-stats">
+                                <span>60 Questions</span>
+                                <span>|</span>
+                                <span>📊 80%</span>
+                            </div>
+                        </div>
+                        <div class="chapter-item">
+                            <h5>Inorganic Chemistry</h5>
+                            <div class="chapter-stats">
+                                <span>50 Questions</span>
+                                <span>|</span>
+                                <span>📊 60%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 20px; margin-top: 30px;">📄 Previous 10 Years Papers</h3>
+                <div class="previous-papers">
+                    <div class="paper-card">
+                        <div class="paper-year">2024</div>
+                        <div class="paper-info">NEET UG 2024</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary" onclick="alert('Opening NEET 2024 paper...')">View</button>
+                            <button class="btn-secondary" onclick="alert('Opening solutions...')">Solutions</button>
+                        </div>
+                    </div>
+                    <div class="paper-card">
+                        <div class="paper-year">2023</div>
+                        <div class="paper-info">NEET UG 2023</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary" onclick="alert('Opening NEET 2023 paper...')">View</button>
+                            <button class="btn-secondary" onclick="alert('Opening solutions...')">Solutions</button>
+                        </div>
+                    </div>
+                    <div class="paper-card">
+                        <div class="paper-year">2022</div>
+                        <div class="paper-info">NEET UG 2022</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary" onclick="alert('Opening NEET 2022 paper...')">View</button>
+                            <button class="btn-secondary" onclick="alert('Opening solutions...')">Solutions</button>
+                        </div>
+                    </div>
+                    <div class="paper-card">
+                        <div class="paper-year">2021</div>
+                        <div class="paper-info">NEET UG 2021</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary" onclick="alert('Opening NEET 2021 paper...')">View</button>
+                            <button class="btn-secondary" onclick="alert('Opening solutions...')">Solutions</button>
+                        </div>
+                    </div>
+                    <div class="paper-card">
+                        <div class="paper-year">2020</div>
+                        <div class="paper-info">NEET UG 2020</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary" onclick="alert('Opening NEET 2020 paper...')">View</button>
+                            <button class="btn-secondary" onclick="alert('Opening solutions...')">Solutions</button>
+                        </div>
+                    </div>
+                    <div class="paper-card">
+                        <div class="paper-year">2019</div>
+                        <div class="paper-info">NEET UG 2019</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary" onclick="alert('Opening NEET 2019 paper...')">View</button>
+                            <button class="btn-secondary" onclick="alert('Opening solutions...')">Solutions</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 7: SSC EXAMS -->
+            <div id="ssc" class="tab-content">
+                <h2 style="margin-bottom: 30px;">👮 SSC Exam Preparation</h2>
+
+                <div style="display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
+                    <div class="card" style="flex: 1; min-width: 200px;">
+                        <h3>SSC CGL</h3>
+                        <div class="stat-value" style="font-size: 1.5em;">2024</div>
+                    </div>
+                    <div class="card" style="flex: 1; min-width: 200px;">
+                        <h3>Questions</h3>
+                        <div class="stat-value">1000+</div>
+                    </div>
+                    <div class="card" style="flex: 1; min-width: 200px;">
+                        <h3>Papers</h3>
+                        <div class="stat-value">10 Years</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 20px;">📚 Syllabus-Wise Practice</h3>
+                <div class="syllabus-section">
+                    <h4>Quantitative Aptitude</h4>
+                    <div class="chapter-list">
+                        <div class="chapter-item">
+                            <h5>Number System</h5>
+                            <div class="chapter-stats">
+                                <span>100 Questions</span>
+                                <span>✅ Done</span>
+                            </div>
+                        </div>
+                        <div class="chapter-item">
+                            <h5>Algebra</h5>
+                            <div class="chapter-stats">
+                                <span>150 Questions</span>
+                                <span>📊 50%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 20px; margin-top: 30px;">📄 Previous Papers</h3>
+                <div class="previous-papers">
+                    <div class="paper-card">
+                        <div class="paper-year">2024</div>
+                        <div class="paper-info">SSC CGL Tier 1</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary">View</button>
+                            <button class="btn-secondary">Solutions</button>
+                        </div>
+                    </div>
+                    <div class="paper-card">
+                        <div class="paper-year">2023</div>
+                        <div class="paper-info">SSC CGL Tier 1</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary">View</button>
+                            <button class="btn-secondary">Solutions</button>
+                        </div>
+                    </div>
+                    <div class="paper-card">
+                        <div class="paper-year">2022</div>
+                        <div class="paper-info">SSC CGL Tier 1</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary">View</button>
+                            <button class="btn-secondary">Solutions</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 8: UPSC EXAMS -->
+            <div id="upsc" class="tab-content">
+                <h2 style="margin-bottom: 30px;">🏛️ UPSC IAS/IFS/IPS Preparation</h2>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>Prelims</h3>
+                        <div class="stat-value">200+</div>
+                        <div class="stat-label">Practice Tests</div>
+                    </div>
+                    <div class="card">
+                        <h3>Mains</h3>
+                        <div class="stat-value">150+</div>
+                        <div class="stat-label">Essay Topics</div>
+                    </div>
+                    <div class="card">
+                        <h3>Papers</h3>
+                        <div class="stat-value">10 Years</div>
+                        <div class="stat-label">All with solutions</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 20px; margin-top: 30px;">📄 Last 10 Years Question Papers</h3>
+                <div class="previous-papers">
+                    <div class="paper-card">
+                        <div class="paper-year">2024</div>
+                        <div class="paper-info">UPSC Prelims</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary">View</button>
+                            <button class="btn-secondary">Solutions</button>
+                        </div>
+                    </div>
+                    <div class="paper-card">
+                        <div class="paper-year">2023</div>
+                        <div class="paper-info">UPSC Prelims</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary">View</button>
+                            <button class="btn-secondary">Solutions</button>
+                        </div>
+                    </div>
+                    <div class="paper-card">
+                        <div class="paper-year">2022</div>
+                        <div class="paper-info">UPSC Prelims</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary">View</button>
+                            <button class="btn-secondary">Solutions</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 9: JEE EXAMS -->
+            <div id="jee" class="tab-content">
+                <h2 style="margin-bottom: 30px;">📐 JEE Main & Advanced Preparation</h2>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>JEE Main</h3>
+                        <div class="stat-value">500+</div>
+                        <div class="stat-label">Questions</div>
+                    </div>
+                    <div class="card">
+                        <h3>JEE Advanced</h3>
+                        <div class="stat-value">300+</div>
+                        <div class="stat-label">Questions</div>
+                    </div>
+                    <div class="card">
+                        <h3>Mock Tests</h3>
+                        <div class="stat-value">100+</div>
+                        <div class="stat-label">Full practice</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 20px; margin-top: 30px;">📄 Previous Papers (10 Years)</h3>
+                <div class="previous-papers">
+                    <div class="paper-card">
+                        <div class="paper-year">2024</div>
+                        <div class="paper-info">JEE Main Jan</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary">View</button>
+                            <button class="btn-secondary">Solutions</button>
+                        </div>
+                    </div>
+                    <div class="paper-card">
+                        <div class="paper-year">2023</div>
+                        <div class="paper-info">JEE Main Apr</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary">View</button>
+                            <button class="btn-secondary">Solutions</button>
+                        </div>
+                    </div>
+                    <div class="paper-card">
+                        <div class="paper-year">2022</div>
+                        <div class="paper-info">JEE Advanced</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary">View</button>
+                            <button class="btn-secondary">Solutions</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 10: MANAGEMENT EXAMS -->
+            <div id="management" class="tab-content">
+                <h2 style="margin-bottom: 30px;">💼 Management Entrance Exams</h2>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>CAT</h3>
+                        <div class="stat-value">400+</div>
+                        <div class="stat-label">Questions</div>
+                    </div>
+                    <div class="card">
+                        <h3>XAT</h3>
+                        <div class="stat-value">250+</div>
+                        <div class="stat-label">Questions</div>
+                    </div>
+                    <div class="card">
+                        <h3>SNAP</h3>
+                        <div class="stat-value">200+</div>
+                        <div class="stat-label">Questions</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 20px; margin-top: 30px;">📄 Previous Papers</h3>
+                <div class="previous-papers">
+                    <div class="paper-card">
+                        <div class="paper-year">2024</div>
+                        <div class="paper-info">CAT</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary">View</button>
+                            <button class="btn-secondary">Solutions</button>
+                        </div>
+                    </div>
+                    <div class="paper-card">
+                        <div class="paper-year">2023</div>
+                        <div class="paper-info">CAT</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary">View</button>
+                            <button class="btn-secondary">Solutions</button>
+                        </div>
+                    </div>
+                    <div class="paper-card">
+                        <div class="paper-year">2022</div>
+                        <div class="paper-info">CAT</div>
+                        <div class="paper-buttons">
+                            <button class="btn-secondary">View</button>
+                            <button class="btn-secondary">Solutions</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 11: PROGRESS -->
+            <div id="progress" class="tab-content">
+                <h2 style="margin-bottom: 20px;">📊 Your Overall Progress</h2>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>English Level</h3>
+                        <div class="stat-value">B2</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 62%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Streak</h3>
+                        <div class="stat-value">27</div>
+                        <div class="stat-label">Days</div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Exam Papers</h3>
+                        <div class="stat-value">145</div>
+                        <div class="stat-label">Done</div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Achievements</h3>
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Badges</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUTH MODAL -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-form">
+            <span class="close-modal" onclick="closeAuthModal()">&times;</span>
+            
+            <div id="signupForm">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="John Smith">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••">
+                </div>
+                <button class="btn-primary" onclick="handleSignup()">Create Account</button>
+                <div class="auth-toggle">
+                    Have an account? <button onclick="toggleAuthForm()">Sign in</button>
+                </div>
+            </div>
+
+            <div id="loginForm" style="display: none;">
+                <h2>Sign In</h2>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••">
+                </div>
+                <button class="btn-primary" onclick="handleLogin()">Sign In</button>
+                <div class="auth-toggle">
+                    New user? <button onclick="toggleAuthForm()">Create account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showAuthModal(mode) {
+            document.getElementById('authModal').classList.add('active');
+            if (mode === 'signup') {
+                document.getElementById('signupForm').style.display = 'block';
+                document.getElementById('loginForm').style.display = 'none';
+            } else {
+                document.getElementById('signupForm').style.display = 'none';
+                document.getElementById('loginForm').style.display = 'block';
+            }
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+        }
+
+        function toggleAuthForm() {
+            document.getElementById('signupForm').style.display = 
+                document.getElementById('signupForm').style.display === 'none' ? 'block' : 'none';
+            document.getElementById('loginForm').style.display = 
+                document.getElementById('loginForm').style.display === 'none' ? 'block' : 'none';
+        }
+
+        function handleSignup() {
+            alert('✅ Account created! Welcome!');
+            closeAuthModal();
+            goToDashboard();
+        }
+
+        function handleLogin() {
+            alert('✅ Signed in successfully!');
+            closeAuthModal();
+            goToDashboard();
+        }
+
+        function goToDashboard() {
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('dashboardPage').classList.add('active');
+        }
+
+        function logout() {
+            alert('Logged out successfully!');
+            document.getElementById('dashboardPage').classList.remove('active');
+            document.getElementById('landingPage').classList.remove('hidden');
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            const selectedTab = document.getElementById(tabName);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+
+            const titles = {
+                'dashboard': 'Dashboard',
+                'languages': 'Learning Languages',
+                'books': 'Books Library',
+                'voice': 'Voice Tutor',
+                'exams': 'Competitive Exams',
+                'medical': 'Medical Exam Prep',
+                'ssc': 'SSC Exam Prep',
+                'upsc': 'UPSC Exam Prep',
+                'jee': 'JEE Exam Prep',
+                'management': 'Management Exams',
+                'progress': 'Progress'
+            };
+            document.getElementById('pageTitle').textContent = titles[tabName] || 'Dashboard';
+
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function selectLanguage(lang) {
+            const langs = {
+                'english': '🇬🇧 English Only',
+                'hinglish': '🇮🇳 Hinglish',
+                'arabic': '🇸🇦 Arabic',
+                'urdu': '🇵🇰 Urdu'
+            };
+            alert('Language changed to: ' + langs[lang] + '!\nAll content will now be in this language.');
+        }
+
+        function openSettings() {
+            alert('⚙️ Settings panel opening...');
+        }
+
+        function scrollTo(selector) {
+            const element = document.querySelector(selector);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('authModal');
+            if (event.target === modal) {
+                closeAuthModal();
+            }
+        }
+    </script>
+</body>
+</html>
