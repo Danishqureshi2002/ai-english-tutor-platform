@@ -1091,6 +1091,349 @@
             border-color: var(--primary);
             color: var(--primary);
         }
+
+        .level-card.active-level {
+            border-color: var(--primary);
+            box-shadow: 0 0 25px rgba(79, 70, 229, 0.4);
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.2), rgba(236, 72, 153, 0.15));
+        }
+
+        .school-level-content {
+            animation: fadeIn 0.3s;
+        }
+
+        /* QUIZ MODAL */
+        .quiz-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .quiz-modal.active {
+            display: flex;
+        }
+
+        .quiz-container {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        .quiz-header h2 {
+            font-size: 1.4em;
+        }
+
+        .quiz-option {
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95em;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            background-color: rgba(79, 70, 229, 0.08);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(79, 70, 229, 0.2);
+            font-weight: 600;
+        }
+
+        .quiz-nav {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+            justify-content: space-between;
+        }
+
+        .quiz-nav button {
+            flex: 1;
+        }
+
+        .quiz-score-summary {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(79, 70, 229, 0.1);
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .quiz-result-item {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--border);
+            background-color: rgba(255,255,255,0.02);
+        }
+
+        .quiz-result-item.correct {
+            border-left-color: var(--success);
+            background-color: rgba(16, 185, 129, 0.08);
+        }
+
+        .quiz-result-item.incorrect {
+            border-left-color: var(--danger);
+            background-color: rgba(239, 68, 68, 0.08);
+        }
+
+        .quiz-result-item p {
+            margin-bottom: 6px;
+            font-size: 0.9em;
+        }
+
+        .quiz-explanation {
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 8px !important;
+        }
+
+        /* AI VOICE BOT PANEL */
+        .bot-practice-panel {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .bot-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding-bottom: 25px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .bot-avatar-wrap {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .bot-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.2em;
+            position: relative;
+            z-index: 3;
+            animation: breathe 3s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(79, 70, 229, 0.4);
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+
+        .bot-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            opacity: 0;
+        }
+
+        .ring-1 { width: 140px; height: 140px; }
+        .ring-2 { width: 160px; height: 160px; }
+
+        .bot-avatar-wrap.listening .bot-ring {
+            border-color: var(--success);
+            animation: ringPulse 1.4s ease-out infinite;
+        }
+
+        .bot-avatar-wrap.listening .ring-2 {
+            animation-delay: 0.4s;
+        }
+
+        .bot-avatar-wrap.speaking .bot-ring {
+            border-color: var(--secondary);
+            animation: ringPulse 1s ease-out infinite;
+        }
+
+        .bot-avatar-wrap.speaking .ring-2 {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes ringPulse {
+            0% { transform: scale(0.8); opacity: 0.8; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        .bot-avatar-wrap.listening .bot-avatar {
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+            animation: breathe 0.8s ease-in-out infinite;
+        }
+
+        .bot-avatar-wrap.speaking .bot-avatar {
+            box-shadow: 0 0 40px rgba(236, 72, 153, 0.6);
+        }
+
+        .waveform {
+            display: none;
+            gap: 4px;
+            align-items: flex-end;
+            height: 24px;
+            margin-top: 10px;
+        }
+
+        .bot-avatar-wrap.speaking + .bot-status + .waveform,
+        .waveform.active {
+            display: flex;
+        }
+
+        .waveform span {
+            width: 4px;
+            background: linear-gradient(180deg, var(--secondary), var(--primary));
+            border-radius: 3px;
+            animation: waveBar 0.9s ease-in-out infinite;
+        }
+
+        .waveform span:nth-child(1) { height: 8px; animation-delay: 0s; }
+        .waveform span:nth-child(2) { height: 16px; animation-delay: 0.1s; }
+        .waveform span:nth-child(3) { height: 22px; animation-delay: 0.2s; }
+        .waveform span:nth-child(4) { height: 14px; animation-delay: 0.3s; }
+        .waveform span:nth-child(5) { height: 10px; animation-delay: 0.4s; }
+
+        @keyframes waveBar {
+            0%, 100% { transform: scaleY(0.4); }
+            50% { transform: scaleY(1.3); }
+        }
+
+        .bot-status {
+            font-size: 1.05em;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 20px;
+            min-height: 24px;
+        }
+
+        .mic-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            font-size: 1.8em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .mic-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .mic-btn.active {
+            background: linear-gradient(135deg, var(--success), #059669);
+            animation: micPulse 1.2s ease-in-out infinite;
+        }
+
+        @keyframes micPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+            50% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+        }
+
+        .mic-hint {
+            color: var(--text-muted);
+            font-size: 0.85em;
+            margin-top: 12px;
+        }
+
+        .chat-transcript {
+            max-height: 320px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 5px;
+        }
+
+        .chat-bubble {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .chat-bubble.bot {
+            align-self: flex-start;
+            background-color: rgba(79, 70, 229, 0.15);
+            border: 1px solid rgba(79, 70, 229, 0.3);
+            border-bottom-left-radius: 2px;
+        }
+
+        .chat-bubble.user {
+            align-self: flex-end;
+            background-color: rgba(236, 72, 153, 0.15);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-bottom-right-radius: 2px;
+        }
+
+        .chat-label {
+            font-size: 0.75em;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .chat-input-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .chat-input-row input {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .voice-support-note {
+            color: var(--text-muted);
+            font-size: 0.8em;
+            margin-top: 15px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -1291,6 +1634,7 @@
             </div>
             <div class="sidebar-menu">
                 <div class="menu-item active" data-tab="dashboard" onclick="switchTab('dashboard')">📊 Dashboard</div>
+                <div class="menu-item" data-tab="myschool" onclick="switchTab('myschool')">🏫 My School</div>
                 <div class="menu-item" data-tab="languages" onclick="switchTab('languages')">🌍 Languages</div>
                 <div class="menu-item" data-tab="books" onclick="switchTab('books')">📚 Books</div>
                 <div class="menu-item" data-tab="voice" onclick="switchTab('voice')">🎤 Voice Tutor</div>
@@ -1393,6 +1737,97 @@
                         <div class="stat-label" style="margin-bottom: 15px;">Current: English</div>
                         <button class="btn-primary" onclick="switchTabFromButton('languages')">Select Language</button>
                     </div>
+                </div>
+            </div>
+
+            <!-- TAB: MY SCHOOL -->
+            <div id="myschool" class="tab-content">
+                <h2 style="margin-bottom: 10px;">🏫 My School — Complete Syllabus (Class 1-12)</h2>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">Full syllabus, chapter-wise topics and practice papers for every class — Primary, Secondary, and Senior Secondary with stream-wise subjects.</p>
+
+                <div class="exam-category-grid">
+                    <div class="exam-card level-card active-level" onclick="showSchoolLevel('primary', this)">
+                        <div class="exam-icon">🧒</div>
+                        <h3>Primary (Class 1-5)</h3>
+                        <div class="exam-details">Hindi, English, Mathematics, EVS</div>
+                        <div class="exam-stats">
+                            <span class="stat-badge">5 Classes</span>
+                            <span class="stat-badge">4 Subjects</span>
+                        </div>
+                        <button class="btn-primary">Explore Primary</button>
+                    </div>
+
+                    <div class="exam-card level-card" onclick="showSchoolLevel('secondary', this)">
+                        <div class="exam-icon">🎒</div>
+                        <h3>Secondary (Class 6-10)</h3>
+                        <div class="exam-details">Hindi, English, Math, Science, History, Geography, Social Studies</div>
+                        <div class="exam-stats">
+                            <span class="stat-badge">5 Classes</span>
+                            <span class="stat-badge">7 Subjects</span>
+                        </div>
+                        <button class="btn-primary">Explore Secondary</button>
+                    </div>
+
+                    <div class="exam-card level-card" onclick="showSchoolLevel('senior', this)">
+                        <div class="exam-icon">🎓</div>
+                        <h3>Senior Secondary (Class 11-12)</h3>
+                        <div class="exam-details">Science, Commerce, Arts & Humanities streams</div>
+                        <div class="exam-stats">
+                            <span class="stat-badge">2 Classes</span>
+                            <span class="stat-badge">3 Streams</span>
+                        </div>
+                        <button class="btn-primary">Explore Senior Secondary</button>
+                    </div>
+                </div>
+
+                <!-- PRIMARY LEVEL -->
+                <div id="schoolPrimary" class="school-level-content" style="display:block; margin-top: 30px;">
+                    <div class="syllabus-section">
+                        <h4>📚 Select Class (Primary)</h4>
+                        <div class="language-buttons" id="primaryClassButtons">
+                            <button class="language-btn active class-btn" onclick="selectClass('primary',1,this)">Class 1</button>
+                            <button class="language-btn class-btn" onclick="selectClass('primary',2,this)">Class 2</button>
+                            <button class="language-btn class-btn" onclick="selectClass('primary',3,this)">Class 3</button>
+                            <button class="language-btn class-btn" onclick="selectClass('primary',4,this)">Class 4</button>
+                            <button class="language-btn class-btn" onclick="selectClass('primary',5,this)">Class 5</button>
+                        </div>
+                    </div>
+                    <div id="primarySubjectsContainer"></div>
+                </div>
+
+                <!-- SECONDARY LEVEL -->
+                <div id="schoolSecondary" class="school-level-content" style="display:none; margin-top: 30px;">
+                    <div class="syllabus-section">
+                        <h4>📚 Select Class (Secondary)</h4>
+                        <div class="language-buttons" id="secondaryClassButtons">
+                            <button class="language-btn active class-btn" onclick="selectClass('secondary',6,this)">Class 6</button>
+                            <button class="language-btn class-btn" onclick="selectClass('secondary',7,this)">Class 7</button>
+                            <button class="language-btn class-btn" onclick="selectClass('secondary',8,this)">Class 8</button>
+                            <button class="language-btn class-btn" onclick="selectClass('secondary',9,this)">Class 9</button>
+                            <button class="language-btn class-btn" onclick="selectClass('secondary',10,this)">Class 10</button>
+                        </div>
+                    </div>
+                    <div id="secondarySubjectsContainer"></div>
+                </div>
+
+                <!-- SENIOR SECONDARY LEVEL -->
+                <div id="schoolSenior" class="school-level-content" style="display:none; margin-top: 30px;">
+                    <div class="syllabus-section">
+                        <h4>📚 Select Class</h4>
+                        <div class="language-buttons" id="seniorClassButtons">
+                            <button class="language-btn active class-btn" onclick="selectSeniorClass(11,this)">Class 11</button>
+                            <button class="language-btn class-btn" onclick="selectSeniorClass(12,this)">Class 12</button>
+                        </div>
+                    </div>
+                    <div class="syllabus-section">
+                        <h4>🎯 Select Stream</h4>
+                        <div class="language-buttons" id="seniorStreamButtons">
+                            <button class="language-btn active stream-btn" onclick="selectStream('science',this)">🔬 Science</button>
+                            <button class="language-btn stream-btn" onclick="selectStream('commerce',this)">💼 Commerce</button>
+                            <button class="language-btn stream-btn" onclick="selectStream('arts',this)">🎨 Arts & Humanities</button>
+                        </div>
+                    </div>
+                    <div id="seniorSubjectsContainer"></div>
                 </div>
             </div>
 
@@ -1561,25 +1996,58 @@
 
             <!-- TAB 4: VOICE TUTOR -->
             <div id="voice" class="tab-content">
-                <h2 style="margin-bottom: 30px;">🎤 AI Voice Tutoring</h2>
+                <h2 style="margin-bottom: 10px;">🎤 AI Voice Tutoring</h2>
+                <p style="color: var(--text-muted); margin-bottom: 25px;">Speak naturally with your AI practice partner. Choose a language below and tap the mic to start talking.</p>
 
                 <div class="language-selector">
-                    <h3>Voice Practice Language</h3>
+                    <h3>Conversation Language</h3>
                     <div class="language-buttons">
-                        <button class="language-btn active">🇬🇧 English</button>
-                        <button class="language-btn" onclick="alert('Hinglish mode activated!')">🇮🇳 Hinglish</button>
-                        <button class="language-btn" onclick="alert('Arabic mode activated!')">🇸🇦 Arabic</button>
-                        <button class="language-btn" onclick="alert('Urdu mode activated!')">🇵🇰 Urdu</button>
+                        <button class="language-btn active" data-lang="english" onclick="setVoiceLanguage('english', this)">🇬🇧 English</button>
+                        <button class="language-btn" data-lang="hinglish" onclick="setVoiceLanguage('hinglish', this)">🇮🇳 Hinglish</button>
+                        <button class="language-btn" data-lang="hindi" onclick="setVoiceLanguage('hindi', this)">🇮🇳 हिंदी (Hindi)</button>
+                        <button class="language-btn" data-lang="urdu" onclick="setVoiceLanguage('urdu', this)">🇵🇰 اردو (Urdu)</button>
+                        <button class="language-btn" data-lang="arabic" onclick="setVoiceLanguage('arabic', this)">🇸🇦 العربية (Arabic)</button>
                     </div>
                 </div>
 
-                <div class="grid">
-                    <div class="card">
-                        <h3>🎤 Start Session</h3>
-                        <div class="stat-label" style="margin-bottom: 15px;">Practice speaking</div>
-                        <button class="btn-primary" onclick="alert('Starting voice session in selected language...')">Start Now</button>
+                <div class="bot-practice-panel">
+                    <div class="bot-stage">
+                        <div class="bot-avatar-wrap">
+                            <div class="bot-ring ring-1"></div>
+                            <div class="bot-ring ring-2"></div>
+                            <div class="bot-avatar" id="botAvatar">
+                                <span id="botFace">🤖</span>
+                            </div>
+                            <div class="waveform" id="waveform">
+                                <span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                        </div>
+                        <div class="bot-status" id="botStatus">Tap the mic to start talking</div>
+
+                        <button class="mic-btn" id="micBtn" onclick="toggleMic()">
+                            <span id="micIcon">🎙️</span>
+                        </button>
+
+                        <div class="mic-hint" id="micHint">Tap once to speak, bot will reply out loud</div>
                     </div>
 
+                    <div class="chat-transcript" id="chatTranscript">
+                        <div class="chat-bubble bot">
+                            <div class="chat-label">🤖 AI Tutor</div>
+                            <div id="initialGreeting">Hi there! I'm your AI speaking partner. Let's practice English together. Tap the mic and say hello, or type below if your device doesn't support voice input!</div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-row">
+                        <input type="text" id="chatTextInput" placeholder="Or type your response here..." onkeypress="if(event.key==='Enter') sendTypedMessage()">
+                        <button class="btn-primary" style="width: auto; padding: 10px 20px;" onclick="sendTypedMessage()">Send</button>
+                        <button class="btn-secondary" style="width: auto; padding: 10px 20px;" onclick="resetConversation()">🔄 Reset</button>
+                    </div>
+
+                    <p class="voice-support-note" id="voiceSupportNote"></p>
+                </div>
+
+                <div class="grid" style="margin-top: 30px;">
                     <div class="card">
                         <h3>📊 Last Session</h3>
                         <div class="stat-value">85%</div>
@@ -1701,7 +2169,7 @@
                 <div class="syllabus-section">
                     <h4>Biology</h4>
                     <div class="chapter-list">
-                        <div class="chapter-item">
+                        <div class="chapter-item" onclick="openQuiz('neet')">
                             <h5>Cell Biology</h5>
                             <div class="chapter-stats">
                                 <span>50 Questions</span>
@@ -1709,7 +2177,7 @@
                                 <span>✅ Completed</span>
                             </div>
                         </div>
-                        <div class="chapter-item">
+                        <div class="chapter-item" onclick="openQuiz('neet')">
                             <h5>Genetics</h5>
                             <div class="chapter-stats">
                                 <span>45 Questions</span>
@@ -1717,7 +2185,7 @@
                                 <span>📊 In Progress</span>
                             </div>
                         </div>
-                        <div class="chapter-item">
+                        <div class="chapter-item" onclick="openQuiz('neet')">
                             <h5>Ecology</h5>
                             <div class="chapter-stats">
                                 <span>40 Questions</span>
@@ -1725,7 +2193,7 @@
                                 <span>⏳ Not Started</span>
                             </div>
                         </div>
-                        <div class="chapter-item">
+                        <div class="chapter-item" onclick="openQuiz('neet')">
                             <h5>Human Physiology</h5>
                             <div class="chapter-stats">
                                 <span>55 Questions</span>
@@ -1739,7 +2207,7 @@
                 <div class="syllabus-section">
                     <h4>Chemistry</h4>
                     <div class="chapter-list">
-                        <div class="chapter-item">
+                        <div class="chapter-item" onclick="openQuiz('neet')">
                             <h5>Organic Chemistry</h5>
                             <div class="chapter-stats">
                                 <span>60 Questions</span>
@@ -1747,7 +2215,7 @@
                                 <span>📊 80%</span>
                             </div>
                         </div>
-                        <div class="chapter-item">
+                        <div class="chapter-item" onclick="openQuiz('neet')">
                             <h5>Inorganic Chemistry</h5>
                             <div class="chapter-stats">
                                 <span>50 Questions</span>
@@ -1764,48 +2232,48 @@
                         <div class="paper-year">2024</div>
                         <div class="paper-info">NEET UG 2024</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary" onclick="alert('Opening NEET 2024 paper...')">View</button>
-                            <button class="btn-secondary" onclick="alert('Opening solutions...')">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('neet')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('neet')">Solutions</button>
                         </div>
                     </div>
                     <div class="paper-card">
                         <div class="paper-year">2023</div>
                         <div class="paper-info">NEET UG 2023</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary" onclick="alert('Opening NEET 2023 paper...')">View</button>
-                            <button class="btn-secondary" onclick="alert('Opening solutions...')">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('neet')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('neet')">Solutions</button>
                         </div>
                     </div>
                     <div class="paper-card">
                         <div class="paper-year">2022</div>
                         <div class="paper-info">NEET UG 2022</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary" onclick="alert('Opening NEET 2022 paper...')">View</button>
-                            <button class="btn-secondary" onclick="alert('Opening solutions...')">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('neet')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('neet')">Solutions</button>
                         </div>
                     </div>
                     <div class="paper-card">
                         <div class="paper-year">2021</div>
                         <div class="paper-info">NEET UG 2021</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary" onclick="alert('Opening NEET 2021 paper...')">View</button>
-                            <button class="btn-secondary" onclick="alert('Opening solutions...')">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('neet')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('neet')">Solutions</button>
                         </div>
                     </div>
                     <div class="paper-card">
                         <div class="paper-year">2020</div>
                         <div class="paper-info">NEET UG 2020</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary" onclick="alert('Opening NEET 2020 paper...')">View</button>
-                            <button class="btn-secondary" onclick="alert('Opening solutions...')">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('neet')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('neet')">Solutions</button>
                         </div>
                     </div>
                     <div class="paper-card">
                         <div class="paper-year">2019</div>
                         <div class="paper-info">NEET UG 2019</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary" onclick="alert('Opening NEET 2019 paper...')">View</button>
-                            <button class="btn-secondary" onclick="alert('Opening solutions...')">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('neet')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('neet')">Solutions</button>
                         </div>
                     </div>
                 </div>
@@ -1834,14 +2302,14 @@
                 <div class="syllabus-section">
                     <h4>Quantitative Aptitude</h4>
                     <div class="chapter-list">
-                        <div class="chapter-item">
+                        <div class="chapter-item" onclick="openQuiz('ssc')">
                             <h5>Number System</h5>
                             <div class="chapter-stats">
                                 <span>100 Questions</span>
                                 <span>✅ Done</span>
                             </div>
                         </div>
-                        <div class="chapter-item">
+                        <div class="chapter-item" onclick="openQuiz('ssc')">
                             <h5>Algebra</h5>
                             <div class="chapter-stats">
                                 <span>150 Questions</span>
@@ -1857,24 +2325,24 @@
                         <div class="paper-year">2024</div>
                         <div class="paper-info">SSC CGL Tier 1</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary">View</button>
-                            <button class="btn-secondary">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('ssc')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('ssc')">Solutions</button>
                         </div>
                     </div>
                     <div class="paper-card">
                         <div class="paper-year">2023</div>
                         <div class="paper-info">SSC CGL Tier 1</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary">View</button>
-                            <button class="btn-secondary">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('ssc')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('ssc')">Solutions</button>
                         </div>
                     </div>
                     <div class="paper-card">
                         <div class="paper-year">2022</div>
                         <div class="paper-info">SSC CGL Tier 1</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary">View</button>
-                            <button class="btn-secondary">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('ssc')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('ssc')">Solutions</button>
                         </div>
                     </div>
                 </div>
@@ -1908,24 +2376,24 @@
                         <div class="paper-year">2024</div>
                         <div class="paper-info">UPSC Prelims</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary">View</button>
-                            <button class="btn-secondary">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('upsc')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('upsc')">Solutions</button>
                         </div>
                     </div>
                     <div class="paper-card">
                         <div class="paper-year">2023</div>
                         <div class="paper-info">UPSC Prelims</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary">View</button>
-                            <button class="btn-secondary">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('upsc')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('upsc')">Solutions</button>
                         </div>
                     </div>
                     <div class="paper-card">
                         <div class="paper-year">2022</div>
                         <div class="paper-info">UPSC Prelims</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary">View</button>
-                            <button class="btn-secondary">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('upsc')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('upsc')">Solutions</button>
                         </div>
                     </div>
                 </div>
@@ -1959,24 +2427,24 @@
                         <div class="paper-year">2024</div>
                         <div class="paper-info">JEE Main Jan</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary">View</button>
-                            <button class="btn-secondary">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('jee')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('jee')">Solutions</button>
                         </div>
                     </div>
                     <div class="paper-card">
                         <div class="paper-year">2023</div>
                         <div class="paper-info">JEE Main Apr</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary">View</button>
-                            <button class="btn-secondary">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('jee')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('jee')">Solutions</button>
                         </div>
                     </div>
                     <div class="paper-card">
                         <div class="paper-year">2022</div>
                         <div class="paper-info">JEE Advanced</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary">View</button>
-                            <button class="btn-secondary">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('jee')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('jee')">Solutions</button>
                         </div>
                     </div>
                 </div>
@@ -2010,24 +2478,24 @@
                         <div class="paper-year">2024</div>
                         <div class="paper-info">CAT</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary">View</button>
-                            <button class="btn-secondary">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('management')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('management')">Solutions</button>
                         </div>
                     </div>
                     <div class="paper-card">
                         <div class="paper-year">2023</div>
                         <div class="paper-info">CAT</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary">View</button>
-                            <button class="btn-secondary">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('management')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('management')">Solutions</button>
                         </div>
                     </div>
                     <div class="paper-card">
                         <div class="paper-year">2022</div>
                         <div class="paper-info">CAT</div>
                         <div class="paper-buttons">
-                            <button class="btn-secondary">View</button>
-                            <button class="btn-secondary">Solutions</button>
+                            <button class="btn-secondary" onclick="openQuiz('management')">View</button>
+                            <button class="btn-secondary" onclick="viewSolutions('management')">Solutions</button>
                         </div>
                     </div>
                 </div>
@@ -2065,6 +2533,36 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- QUIZ / PRACTICE TEST MODAL -->
+    <div class="quiz-modal" id="quizModal">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h2 id="quizTitle">Practice Test</h2>
+                <span class="close-modal" onclick="closeQuiz()">&times;</span>
+            </div>
+
+            <div class="quiz-progress" id="quizProgressWrap">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="quizProgressFill" style="width: 0%;"></div>
+                </div>
+                <div id="quizProgressText" style="color: var(--text-muted); font-size: 0.9em; margin-top: 8px;">Question 1 of 5</div>
+            </div>
+
+            <div class="quiz-question-box" id="quizQuestionBox">
+                <h3 id="quizQuestionText" style="margin-bottom: 20px; line-height: 1.5;"></h3>
+                <div id="quizOptionsContainer"></div>
+            </div>
+
+            <div class="quiz-nav" id="quizNavBox">
+                <button class="btn-secondary" id="quizPrevBtn" onclick="quizPrev()">← Previous</button>
+                <button class="btn-primary" id="quizNextBtn" onclick="quizNext()">Next →</button>
+                <button class="btn-primary" id="quizSubmitBtn" onclick="quizSubmit()" style="display:none;">✅ Submit Test</button>
+            </div>
+
+            <div id="quizResultBox" style="display:none;"></div>
         </div>
     </div>
 
@@ -2169,6 +2667,7 @@
 
             const titles = {
                 'dashboard': 'Dashboard',
+                'myschool': 'My School',
                 'languages': 'Learning Languages',
                 'books': 'Books Library',
                 'voice': 'Voice Tutor',
@@ -2211,6 +2710,670 @@
             document.getElementById('sidebar').classList.remove('active');
             document.getElementById('sidebarOverlay').classList.remove('active');
         }
+
+        // ===== QUIZ / PRACTICE TEST ENGINE =====
+        const quizBank = {
+            neet: {
+                title: 'NEET Practice Test — Biology, Physics & Chemistry',
+                questions: [
+                    { q: 'Which cell organelle is known as the "powerhouse of the cell"?', options: ['Ribosome', 'Mitochondria', 'Golgi Apparatus', 'Lysosome'], answer: 1, explanation: 'Mitochondria produce ATP through cellular respiration, earning them this name.' },
+                    { q: 'The SI unit of electric current is:', options: ['Volt', 'Watt', 'Ampere', 'Ohm'], answer: 2, explanation: 'Ampere (A) is the SI base unit for electric current.' },
+                    { q: 'Which of the following is an example of a strong electrolyte?', options: ['Acetic acid', 'Ammonia', 'Sodium chloride', 'Water'], answer: 2, explanation: 'NaCl fully dissociates into ions in solution, making it a strong electrolyte.' },
+                    { q: 'DNA replication occurs during which phase of the cell cycle?', options: ['G1 phase', 'S phase', 'G2 phase', 'M phase'], answer: 1, explanation: 'The S (Synthesis) phase is when DNA replication takes place.' },
+                    { q: "Newton's second law of motion relates force to:", options: ['Mass and velocity', 'Mass and acceleration', 'Mass and displacement', 'Velocity and time'], answer: 1, explanation: 'F = ma — force equals mass times acceleration.' },
+                    { q: 'Which hormone regulates blood glucose levels by promoting glucose uptake?', options: ['Glucagon', 'Insulin', 'Adrenaline', 'Thyroxine'], answer: 1, explanation: 'Insulin, secreted by pancreatic beta cells, lowers blood glucose.' },
+                    { q: 'The pH of a neutral solution at 25°C is:', options: ['0', '7', '14', '1'], answer: 1, explanation: 'A pH of 7 indicates neutrality at standard temperature.' },
+                    { q: 'Photosynthesis primarily occurs in which part of the plant cell?', options: ['Nucleus', 'Chloroplast', 'Mitochondria', 'Vacuole'], answer: 1, explanation: 'Chloroplasts contain chlorophyll, which captures light energy for photosynthesis.' }
+                ]
+            },
+            ssc: {
+                title: 'SSC CGL Practice Test — Quant, Reasoning & GK',
+                questions: [
+                    { q: 'What is the next number in the series: 2, 6, 12, 20, 30, ?', options: ['40', '42', '38', '36'], answer: 1, explanation: 'Differences increase by 2 each time (4,6,8,10,12), so next = 30+12 = 42.' },
+                    { q: 'If 20% of a number is 50, what is the number?', options: ['200', '250', '300', '150'], answer: 1, explanation: '50 ÷ 0.20 = 250.' },
+                    { q: 'Who is known as the "Father of the Indian Constitution"?', options: ['Mahatma Gandhi', 'Jawaharlal Nehru', 'B.R. Ambedkar', 'Sardar Patel'], answer: 2, explanation: 'Dr. B.R. Ambedkar chaired the Constitution Drafting Committee.' },
+                    { q: 'Find the odd one out: Apple, Mango, Potato, Banana', options: ['Apple', 'Mango', 'Potato', 'Banana'], answer: 2, explanation: 'Potato is a vegetable; the rest are fruits.' },
+                    { q: 'The headquarters of the United Nations is located in:', options: ['Geneva', 'Paris', 'New York', 'London'], answer: 2, explanation: 'The UN Headquarters is in New York City, USA.' },
+                    { q: 'A train travels 300 km in 5 hours. What is its speed?', options: ['50 km/h', '60 km/h', '55 km/h', '65 km/h'], answer: 1, explanation: 'Speed = Distance ÷ Time = 300 ÷ 5 = 60 km/h.' }
+                ]
+            },
+            upsc: {
+                title: 'UPSC Prelims Practice Test — Polity, History & Geography',
+                questions: [
+                    { q: 'The Preamble of the Indian Constitution was amended by which Amendment Act?', options: ['42nd Amendment', '44th Amendment', '73rd Amendment', '52nd Amendment'], answer: 0, explanation: 'The 42nd Amendment (1976) added "Socialist", "Secular", and "Integrity" to the Preamble.' },
+                    { q: 'Which Article of the Constitution deals with the Right to Constitutional Remedies?', options: ['Article 19', 'Article 21', 'Article 32', 'Article 14'], answer: 2, explanation: 'Article 32 empowers citizens to move the Supreme Court for enforcement of fundamental rights.' },
+                    { q: 'The Battle of Plassey was fought in which year?', options: ['1757', '1764', '1857', '1801'], answer: 0, explanation: 'The Battle of Plassey (1757) marked the start of British political control in India.' },
+                    { q: 'Which is the longest river in India?', options: ['Yamuna', 'Godavari', 'Ganga', 'Brahmaputra'], answer: 2, explanation: 'The Ganga is the longest river flowing within India (~2,525 km).' },
+                    { q: 'The Directive Principles of State Policy are contained in which Part of the Constitution?', options: ['Part III', 'Part IV', 'Part V', 'Part VI'], answer: 1, explanation: 'Part IV (Articles 36-51) contains the Directive Principles of State Policy.' }
+                ]
+            },
+            jee: {
+                title: 'JEE Main Practice Test — Physics, Chemistry & Maths',
+                questions: [
+                    { q: 'The derivative of sin(x) with respect to x is:', options: ['cos(x)', '-cos(x)', '-sin(x)', 'tan(x)'], answer: 0, explanation: 'd/dx[sin(x)] = cos(x) by standard differentiation rules.' },
+                    { q: 'The value of ∫(1/x)dx is:', options: ['x + C', 'ln|x| + C', '1/x² + C', 'x² + C'], answer: 1, explanation: 'The integral of 1/x is the natural logarithm ln|x| + C.' },
+                    { q: 'Which quantum number determines the shape of an orbital?', options: ['Principal (n)', 'Azimuthal (l)', 'Magnetic (m)', 'Spin (s)'], answer: 1, explanation: 'The azimuthal quantum number (l) defines the subshell shape (s, p, d, f).' },
+                    { q: 'The escape velocity from Earth is approximately:', options: ['7.9 km/s', '11.2 km/s', '9.8 km/s', '3 × 10^8 m/s'], answer: 1, explanation: 'Earth\'s escape velocity is about 11.2 km/s.' },
+                    { q: 'For a first-order reaction, the unit of the rate constant k is:', options: ['mol L⁻¹ s⁻¹', 's⁻¹', 'L mol⁻¹ s⁻¹', 'mol² L⁻² s⁻¹'], answer: 1, explanation: 'First-order reaction rate constants have units of inverse time (s⁻¹).' },
+                    { q: 'The number of moles in 22 grams of CO₂ is (Molar mass = 44 g/mol):', options: ['0.25 mol', '0.5 mol', '1 mol', '2 mol'], answer: 1, explanation: 'Moles = mass ÷ molar mass = 22 ÷ 44 = 0.5 mol.' }
+                ]
+            },
+            management: {
+                title: 'CAT / Management Practice Test — Quant, Verbal & DI',
+                questions: [
+                    { q: 'If the ratio of two numbers is 3:5 and their sum is 64, what is the larger number?', options: ['24', '40', '36', '30'], answer: 1, explanation: 'Total parts = 8. Each part = 8. Larger number = 5 × 8 = 40.' },
+                    { q: 'Choose the word most nearly OPPOSITE in meaning to "Frugal":', options: ['Thrifty', 'Extravagant', 'Economical', 'Prudent'], answer: 1, explanation: '"Frugal" means economical; its opposite is "Extravagant".' },
+                    { q: 'A shopkeeper marks up goods by 40% and gives a discount of 10%. What is his net profit percentage?', options: ['26%', '30%', '25%', '20%'], answer: 0, explanation: 'Net factor = 1.4 × 0.9 = 1.26, i.e., 26% profit.' },
+                    { q: 'In a group of 5 people, the average age is 30. If a 6th person joins and the new average is 32, what is the age of the 6th person?', options: ['40', '42', '38', '44'], answer: 1, explanation: 'New total = 32×6=192, old total=150, so new person = 192-150 = 42.' },
+                    { q: 'Which of these is NOT a component of the 4 Ps of Marketing?', options: ['Product', 'Price', 'Promotion', 'People'], answer: 3, explanation: 'The classic 4 Ps are Product, Price, Place, and Promotion — "People" belongs to the extended 7 Ps.' }
+                ]
+            },
+
+            // ===== SCHOOL SUBJECT QUIZZES =====
+            hindi: {
+                title: 'Hindi Practice Quiz',
+                questions: [
+                    { q: '"पुस्तक" शब्द का पर्यायवाची है:', options: ['किताब', 'कलम', 'मेज़', 'घर'], answer: 0, explanation: '"पुस्तक" और "किताब" एक ही अर्थ रखते हैं।' },
+                    { q: 'हिंदी वर्णमाला में कुल स्वर होते हैं:', options: ['10', '11', '13', '15'], answer: 1, explanation: 'हिंदी में 11 स्वर माने जाते हैं (अ, आ, इ, ई...)।' },
+                    { q: '"वह दौड़ रहा है" — इस वाक्य में क्रिया है:', options: ['वह', 'दौड़ रहा है', 'है', 'रहा'], answer: 1, explanation: '"दौड़ रहा है" वाक्य में क्रिया पद है।' },
+                    { q: '"राम ने रावण को मारा" — यह किस काल का वाक्य है?', options: ['वर्तमान काल', 'भूतकाल', 'भविष्यत काल', 'कोई नहीं'], answer: 1, explanation: '"मारा" भूतकाल की क्रिया है।' }
+                ]
+            },
+            english: {
+                title: 'English Practice Quiz',
+                questions: [
+                    { q: 'Choose the correctly spelled word:', options: ['Recieve', 'Receive', 'Receeve', 'Receve'], answer: 1, explanation: '"Receive" follows the "i before e except after c" rule.' },
+                    { q: 'Identify the noun in: "The dog barked loudly."', options: ['The', 'Dog', 'Barked', 'Loudly'], answer: 1, explanation: '"Dog" is the naming word (noun) in the sentence.' },
+                    { q: 'What is the plural of "child"?', options: ['Childs', 'Childes', 'Children', 'Childrens'], answer: 2, explanation: '"Children" is the irregular plural form of "child".' },
+                    { q: 'Choose the correct synonym for "Happy":', options: ['Sad', 'Joyful', 'Angry', 'Tired'], answer: 1, explanation: '"Joyful" means the same as "Happy".' }
+                ]
+            },
+            mathematics: {
+                title: 'Mathematics Practice Quiz',
+                questions: [
+                    { q: 'What is 7 × 8?', options: ['54', '56', '58', '64'], answer: 1, explanation: '7 × 8 = 56.' },
+                    { q: 'What is the value of π (pi) rounded to two decimal places?', options: ['3.12', '3.14', '3.16', '3.18'], answer: 1, explanation: 'π ≈ 3.14159..., rounded to 3.14.' },
+                    { q: 'Solve for x: 2x + 5 = 15', options: ['x = 5', 'x = 10', 'x = 7', 'x = 4'], answer: 0, explanation: '2x = 10, so x = 5.' },
+                    { q: 'What is the area of a rectangle with length 8 cm and width 5 cm?', options: ['13 cm²', '40 cm²', '26 cm²', '45 cm²'], answer: 1, explanation: 'Area = length × width = 8 × 5 = 40 cm².' }
+                ]
+            },
+            evs: {
+                title: 'EVS Practice Quiz',
+                questions: [
+                    { q: 'Which gas do plants absorb during photosynthesis?', options: ['Oxygen', 'Carbon dioxide', 'Nitrogen', 'Hydrogen'], answer: 1, explanation: 'Plants take in CO₂ and release oxygen during photosynthesis.' },
+                    { q: 'Which of these is a renewable source of energy?', options: ['Coal', 'Petroleum', 'Solar energy', 'Natural gas'], answer: 2, explanation: 'Solar energy is naturally replenished and considered renewable.' },
+                    { q: 'The process of water changing into vapour is called:', options: ['Condensation', 'Evaporation', 'Precipitation', 'Freezing'], answer: 1, explanation: 'Evaporation is the process where liquid water turns into vapour.' }
+                ]
+            },
+            science: {
+                title: 'Science Practice Quiz',
+                questions: [
+                    { q: 'What is the chemical symbol for water?', options: ['H2O', 'CO2', 'O2', 'NaCl'], answer: 0, explanation: 'Water is composed of 2 hydrogen atoms and 1 oxygen atom (H2O).' },
+                    { q: 'Which organ pumps blood throughout the human body?', options: ['Lungs', 'Liver', 'Heart', 'Kidney'], answer: 2, explanation: 'The heart pumps blood through the circulatory system.' },
+                    { q: 'Sound travels fastest through:', options: ['Air', 'Water', 'Vacuum', 'Solid'], answer: 3, explanation: 'Sound travels fastest through solids due to closely packed particles.' },
+                    { q: 'Which force pulls objects toward the Earth?', options: ['Magnetic force', 'Gravity', 'Friction', 'Tension'], answer: 1, explanation: 'Gravity is the force that attracts objects toward the Earth\'s center.' }
+                ]
+            },
+            history: {
+                title: 'History Practice Quiz',
+                questions: [
+                    { q: 'Who was the first Prime Minister of India?', options: ['Mahatma Gandhi', 'Jawaharlal Nehru', 'Sardar Patel', 'Rajendra Prasad'], answer: 1, explanation: 'Jawaharlal Nehru served as India\'s first Prime Minister from 1947.' },
+                    { q: 'The Quit India Movement was launched in which year?', options: ['1930', '1942', '1947', '1920'], answer: 1, explanation: 'The Quit India Movement began in August 1942.' },
+                    { q: 'Who built the Taj Mahal?', options: ['Akbar', 'Shah Jahan', 'Aurangzeb', 'Humayun'], answer: 1, explanation: 'Emperor Shah Jahan built the Taj Mahal in memory of Mumtaz Mahal.' }
+                ]
+            },
+            geography: {
+                title: 'Geography Practice Quiz',
+                questions: [
+                    { q: 'Which is the largest continent by area?', options: ['Africa', 'Asia', 'Europe', 'North America'], answer: 1, explanation: 'Asia is the largest continent, covering about 30% of Earth\'s land area.' },
+                    { q: 'Which is the longest river in the world?', options: ['Amazon', 'Nile', 'Ganga', 'Mississippi'], answer: 1, explanation: 'The Nile River is generally considered the longest river in the world.' },
+                    { q: 'Mount Everest is located in which mountain range?', options: ['Andes', 'Alps', 'Himalayas', 'Rockies'], answer: 2, explanation: 'Mount Everest is part of the Himalayan mountain range.' }
+                ]
+            },
+            socialstudies: {
+                title: 'Social Studies Practice Quiz',
+                questions: [
+                    { q: 'India is a country with which form of government?', options: ['Monarchy', 'Democracy', 'Dictatorship', 'Theocracy'], answer: 1, explanation: 'India is the world\'s largest democracy.' },
+                    { q: 'The Indian National Congress was founded in:', options: ['1885', '1905', '1857', '1920'], answer: 0, explanation: 'The Indian National Congress was founded in 1885.' },
+                    { q: 'Which document is known as the supreme law of India?', options: ['The Constitution', 'The Panchsheel', 'The Vedas', 'The Gazette'], answer: 0, explanation: 'The Constitution of India is the supreme law governing the country.' }
+                ]
+            },
+            physics: {
+                title: 'Physics Practice Quiz',
+                questions: [
+                    { q: 'The SI unit of force is:', options: ['Joule', 'Newton', 'Watt', 'Pascal'], answer: 1, explanation: 'Force is measured in Newtons (N) in the SI system.' },
+                    { q: 'Which law states "every action has an equal and opposite reaction"?', options: ["Newton's First Law", "Newton's Second Law", "Newton's Third Law", "Law of Gravitation"], answer: 2, explanation: "Newton's Third Law describes action-reaction force pairs." },
+                    { q: 'The speed of light in vacuum is approximately:', options: ['3 × 10^5 m/s', '3 × 10^6 m/s', '3 × 10^8 m/s', '3 × 10^10 m/s'], answer: 2, explanation: 'Light travels at about 3 × 10^8 m/s in a vacuum.' }
+                ]
+            },
+            chemistry: {
+                title: 'Chemistry Practice Quiz',
+                questions: [
+                    { q: 'The atomic number of an element represents the number of:', options: ['Neutrons', 'Protons', 'Electrons only', 'Isotopes'], answer: 1, explanation: 'Atomic number = number of protons in the nucleus.' },
+                    { q: 'Which gas is most abundant in Earth\'s atmosphere?', options: ['Oxygen', 'Carbon dioxide', 'Nitrogen', 'Hydrogen'], answer: 2, explanation: 'Nitrogen makes up about 78% of Earth\'s atmosphere.' },
+                    { q: 'What type of bond is formed by the sharing of electrons?', options: ['Ionic bond', 'Covalent bond', 'Metallic bond', 'Hydrogen bond'], answer: 1, explanation: 'Covalent bonds form when atoms share electron pairs.' }
+                ]
+            },
+            biology: {
+                title: 'Biology Practice Quiz',
+                questions: [
+                    { q: 'The basic unit of life is the:', options: ['Tissue', 'Cell', 'Organ', 'Organism'], answer: 1, explanation: 'The cell is considered the fundamental unit of life.' },
+                    { q: 'Which blood cells help fight infections?', options: ['Red blood cells', 'White blood cells', 'Platelets', 'Plasma'], answer: 1, explanation: 'White blood cells (leukocytes) are part of the immune system.' },
+                    { q: 'Photosynthesis converts light energy into:', options: ['Kinetic energy', 'Chemical energy', 'Heat energy', 'Sound energy'], answer: 1, explanation: 'Plants store light energy as chemical energy in glucose.' }
+                ]
+            },
+            accountancy: {
+                title: 'Accountancy Practice Quiz',
+                questions: [
+                    { q: 'The accounting equation is:', options: ['Assets = Liabilities - Capital', 'Assets = Liabilities + Capital', 'Capital = Assets + Liabilities', 'Liabilities = Assets + Capital'], answer: 1, explanation: 'The fundamental accounting equation: Assets = Liabilities + Capital.' },
+                    { q: 'Which financial statement shows a company\'s profit or loss?', options: ['Balance Sheet', 'Income Statement', 'Cash Flow Statement', 'Trial Balance'], answer: 1, explanation: 'The Income Statement (P&L Account) reports revenues and expenses.' },
+                    { q: 'A debit entry in a bank column of a cash book represents:', options: ['Cash withdrawal', 'Cash deposit', 'Bank charges', 'Loan repayment'], answer: 1, explanation: 'A debit in the bank column typically records a deposit into the bank account.' }
+                ]
+            },
+            businessstudies: {
+                title: 'Business Studies Practice Quiz',
+                questions: [
+                    { q: 'Which of these is a primary function of management?', options: ['Planning', 'Advertising', 'Selling', 'Auditing'], answer: 0, explanation: 'Planning is one of the five core functions of management.' },
+                    { q: 'A Sole Proprietorship is owned by:', options: ['Two or more people', 'Shareholders', 'One person', 'The government'], answer: 2, explanation: 'A sole proprietorship is owned and run by a single individual.' },
+                    { q: 'Which of these best defines "Marketing"?', options: ['Only advertising', 'Only selling', 'Creating and delivering value to customers', 'Manufacturing goods'], answer: 2, explanation: 'Marketing encompasses the full process of creating, communicating, and delivering value.' }
+                ]
+            },
+            economics: {
+                title: 'Economics Practice Quiz',
+                questions: [
+                    { q: 'The law of demand states that, other things being equal:', options: ['Price and demand move together', 'Price and demand move inversely', 'Demand is always constant', 'Price has no effect on demand'], answer: 1, explanation: 'As price rises, quantity demanded typically falls, and vice versa.' },
+                    { q: 'GDP stands for:', options: ['Gross Domestic Product', 'General Domestic Price', 'Gross Development Plan', 'General Demand Price'], answer: 0, explanation: 'GDP measures the total value of goods and services produced in a country.' },
+                    { q: 'Inflation refers to:', options: ['A fall in general price levels', 'A rise in general price levels', 'Stable prices', 'Increase in exports'], answer: 1, explanation: 'Inflation is a sustained increase in the general price level.' }
+                ]
+            },
+            politicalscience: {
+                title: 'Political Science Practice Quiz',
+                questions: [
+                    { q: 'India follows which type of government system?', options: ['Unitary', 'Federal', 'Confederal', 'Autocratic'], answer: 1, explanation: 'India has a federal system with power divided between central and state governments.' },
+                    { q: 'The Indian Parliament consists of:', options: ['Only Lok Sabha', 'Only Rajya Sabha', 'Lok Sabha and Rajya Sabha', 'President only'], answer: 2, explanation: 'The Indian Parliament is bicameral: Lok Sabha and Rajya Sabha.' },
+                    { q: 'Universal Adult Franchise means:', options: ['Only educated people vote', 'Only men vote', 'All adult citizens have the right to vote', 'Only landowners vote'], answer: 2, explanation: 'It grants all adult citizens the right to vote regardless of caste, gender, or wealth.' }
+                ]
+            },
+            sociology: {
+                title: 'Sociology Practice Quiz',
+                questions: [
+                    { q: 'The smallest unit of society is generally considered to be:', options: ['The state', 'The family', 'The community', 'The nation'], answer: 1, explanation: 'The family is often regarded as the basic unit of society.' },
+                    { q: 'Socialization is the process by which individuals:', options: ['Earn income', 'Learn the norms and values of society', 'Migrate to cities', 'Start businesses'], answer: 1, explanation: 'Socialization helps individuals learn societal norms, values, and behaviors.' },
+                    { q: 'A "social institution" example includes:', options: ['Marriage', 'A car', 'A mobile phone', 'A river'], answer: 0, explanation: 'Marriage is a recognized social institution that structures relationships.' }
+                ]
+            },
+            psychology: {
+                title: 'Psychology Practice Quiz',
+                questions: [
+                    { q: 'Who is known as the father of Psychoanalysis?', options: ['Carl Jung', 'Sigmund Freud', 'B.F. Skinner', 'Ivan Pavlov'], answer: 1, explanation: 'Sigmund Freud developed the theory and practice of psychoanalysis.' },
+                    { q: 'Classical conditioning was first studied by:', options: ['Ivan Pavlov', 'Jean Piaget', 'Abraham Maslow', 'Carl Rogers'], answer: 0, explanation: 'Pavlov\'s experiments with dogs established classical conditioning.' },
+                    { q: 'Maslow\'s hierarchy of needs places which need at the base?', options: ['Self-actualization', 'Esteem', 'Physiological needs', 'Belongingness'], answer: 2, explanation: 'Physiological needs (food, water, shelter) form the base of Maslow\'s pyramid.' }
+                ]
+            }
+        };
+
+        let currentQuiz = null;
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+
+        function openQuiz(key) {
+            const quiz = quizBank[key];
+            if (!quiz) {
+                alert('Practice questions for this topic are being added soon!');
+                return;
+            }
+            currentQuiz = quiz;
+            currentQuestionIndex = 0;
+            userAnswers = new Array(quiz.questions.length).fill(null);
+
+            document.getElementById('quizTitle').textContent = quiz.title;
+            document.getElementById('quizQuestionBox').style.display = 'block';
+            document.getElementById('quizNavBox').style.display = 'flex';
+            document.getElementById('quizProgressWrap').style.display = 'block';
+            const resultBox = document.getElementById('quizResultBox');
+            resultBox.style.display = 'none';
+            resultBox.innerHTML = '';
+
+            renderQuizQuestion();
+            document.getElementById('quizModal').classList.add('active');
+        }
+
+        function viewSolutions(key) {
+            const quiz = quizBank[key];
+            if (!quiz) {
+                alert('Solutions for this paper are being added soon!');
+                return;
+            }
+            currentQuiz = quiz;
+            userAnswers = quiz.questions.map(q => q.answer);
+
+            document.getElementById('quizTitle').textContent = quiz.title + ' — Solutions';
+            document.getElementById('quizQuestionBox').style.display = 'none';
+            document.getElementById('quizNavBox').style.display = 'none';
+            document.getElementById('quizProgressWrap').style.display = 'none';
+
+            document.getElementById('quizModal').classList.add('active');
+            renderQuizResults();
+        }
+
+        function closeQuiz() {
+            document.getElementById('quizModal').classList.remove('active');
+        }
+
+        function openSchoolSubjectQuiz(subjectName, mode) {
+            const key = subjectName.toLowerCase().replace(/[^a-z]/g, '');
+            if (!quizBank[key]) {
+                alert('Practice questions for ' + subjectName + ' are being added soon!');
+                return;
+            }
+            if (mode === 'practice') {
+                openQuiz(key);
+            } else {
+                viewSolutions(key);
+            }
+        }
+
+        function renderQuizQuestion() {
+            const q = currentQuiz.questions[currentQuestionIndex];
+            const total = currentQuiz.questions.length;
+
+            document.getElementById('quizQuestionText').textContent = (currentQuestionIndex + 1) + '. ' + q.q;
+            document.getElementById('quizProgressText').textContent = 'Question ' + (currentQuestionIndex + 1) + ' of ' + total;
+            document.getElementById('quizProgressFill').style.width = (((currentQuestionIndex + 1) / total) * 100) + '%';
+
+            const container = document.getElementById('quizOptionsContainer');
+            container.innerHTML = '';
+            q.options.forEach((opt, i) => {
+                const div = document.createElement('div');
+                div.className = 'quiz-option' + (userAnswers[currentQuestionIndex] === i ? ' selected' : '');
+                div.textContent = String.fromCharCode(65 + i) + '. ' + opt;
+                div.onclick = function() { selectQuizOption(i); };
+                container.appendChild(div);
+            });
+
+            document.getElementById('quizPrevBtn').style.display = currentQuestionIndex === 0 ? 'none' : 'inline-block';
+            document.getElementById('quizNextBtn').style.display = currentQuestionIndex === total - 1 ? 'none' : 'inline-block';
+            document.getElementById('quizSubmitBtn').style.display = currentQuestionIndex === total - 1 ? 'inline-block' : 'none';
+        }
+
+        function selectQuizOption(i) {
+            userAnswers[currentQuestionIndex] = i;
+            renderQuizQuestion();
+        }
+
+        function quizNext() {
+            if (currentQuestionIndex < currentQuiz.questions.length - 1) {
+                currentQuestionIndex++;
+                renderQuizQuestion();
+            }
+        }
+
+        function quizPrev() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuizQuestion();
+            }
+        }
+
+        function quizSubmit() {
+            document.getElementById('quizQuestionBox').style.display = 'none';
+            document.getElementById('quizNavBox').style.display = 'none';
+            document.getElementById('quizProgressWrap').style.display = 'none';
+            renderQuizResults();
+        }
+
+        function renderQuizResults() {
+            let score = 0;
+            let resultHtml = '<h3 style="margin-bottom: 15px;">📊 Results & Explanations</h3>';
+
+            currentQuiz.questions.forEach((q, i) => {
+                const correct = userAnswers[i] === q.answer;
+                if (correct) score++;
+                const yourAnswerText = userAnswers[i] !== null && userAnswers[i] !== undefined
+                    ? String.fromCharCode(65 + userAnswers[i]) + '. ' + q.options[userAnswers[i]]
+                    : 'Not answered';
+
+                resultHtml += '<div class="quiz-result-item ' + (correct ? 'correct' : 'incorrect') + '">' +
+                    '<p><strong>' + (i + 1) + '. ' + q.q + '</strong></p>' +
+                    '<p>Your answer: ' + yourAnswerText + '</p>' +
+                    '<p>Correct answer: ' + String.fromCharCode(65 + q.answer) + '. ' + q.options[q.answer] + '</p>' +
+                    '<p class="quiz-explanation">💡 ' + q.explanation + '</p>' +
+                    '</div>';
+            });
+
+            const percent = Math.round((score / currentQuiz.questions.length) * 100);
+            resultHtml = '<div class="quiz-score-summary">Score: ' + score + '/' + currentQuiz.questions.length + ' (' + percent + '%)</div>' + resultHtml;
+            resultHtml += '<button class="btn-primary" style="margin-top: 10px; width: 100%;" onclick="closeQuiz()">Close</button>';
+
+            const resultBox = document.getElementById('quizResultBox');
+            resultBox.innerHTML = resultHtml;
+            resultBox.style.display = 'block';
+        }
+
+        // ===== AI VOICE BOT ENGINE =====
+        const voiceScripts = {
+            english: {
+                code: 'en-US',
+                greeting: "Hi there! I'm your AI speaking partner. Let's practice English together. Tap the mic and say hello, or type below if your device doesn't support voice input!",
+                encouragements: ["Great job! Your pronunciation is improving.", "Well said! Let's continue.", "Nice sentence! Keep going.", "Excellent effort!", "That's a good start, let's build on it."],
+                followUps: ["Can you tell me about your favorite hobby?", "What did you have for breakfast today?", "Describe your best friend in a few sentences.", "What are your plans for this weekend?", "Tell me about a movie you recently watched.", "What is your favorite place to visit and why?"]
+            },
+            hinglish: {
+                code: 'en-IN',
+                greeting: "Hi! Main aapka AI speaking partner hoon. Chaliye English practice karte hain. Mic dabaiye aur bolna shuru kariye, ya neeche type bhi kar sakte hain!",
+                encouragements: ["Bahut badiya! Aapki English improve ho rahi hai.", "Shabaash! Chaliye aage badhte hain.", "Accha bola! Keep going.", "Zabardast effort!", "Good start hai, isko aur improve karte hain."],
+                followUps: ["Apna favorite hobby batao English mein.", "Aaj breakfast mein kya khaya?", "Apne best friend ke baare mein batao.", "Weekend ka plan kya hai?", "Koi recent movie ke baare mein batao.", "Aapki favorite jagah kaunsi hai aur kyun?"]
+            },
+            hindi: {
+                code: 'hi-IN',
+                greeting: "नमस्ते! मैं आपका एआई स्पीकिंग पार्टनर हूँ। आइए अंग्रेज़ी बोलने का अभ्यास करते हैं। माइक दबाइए और बोलना शुरू कीजिए!",
+                encouragements: ["बहुत बढ़िया! आपका उच्चारण सुधर रहा है।", "शाबाश! चलिए आगे बढ़ते हैं।", "अच्छा बोला! ऐसे ही जारी रखें।", "शानदार प्रयास!", "अच्छी शुरुआत है, इसे और बेहतर करते हैं।"],
+                followUps: ["अपने पसंदीदा शौक के बारे में बताइए।", "आज नाश्ते में क्या खाया?", "अपने सबसे अच्छे दोस्त के बारे में बताइए।", "इस सप्ताहांत की क्या योजना है?", "हाल ही में देखी गई किसी फिल्म के बारे में बताइए।", "आपकी पसंदीदा जगह कौन सी है और क्यों?"]
+            },
+            urdu: {
+                code: 'ur-PK',
+                greeting: "السلام علیکم! میں آپ کا اے آئی اسپیکنگ پارٹنر ہوں۔ آئیے انگریزی بولنے کی مشق کرتے ہیں۔ مائیک دبائیں اور بولنا شروع کریں!",
+                encouragements: ["بہت خوب! آپ کا تلفظ بہتر ہو رہا ہے۔", "شاباش! چلیں آگے بڑھتے ہیں۔", "اچھا بولا! اسی طرح جاری رکھیں۔", "شاندار کوشش!", "اچھی شروعات ہے، اسے مزید بہتر بناتے ہیں۔"],
+                followUps: ["اپنے پسندیدہ شوق کے بارے میں بتائیں۔", "آج ناشتے میں کیا کھایا؟", "اپنے بہترین دوست کے بارے میں بتائیں۔", "اس ہفتے کے آخر میں کیا پروگرام ہے؟", "حال ہی میں دیکھی گئی کسی فلم کے بارے میں بتائیں۔", "آپ کی پسندیدہ جگہ کون سی ہے اور کیوں؟"]
+            },
+            arabic: {
+                code: 'ar-SA',
+                greeting: "مرحباً! أنا شريكك في التحدث بالذكاء الاصطناعي. دعنا نمارس التحدث بالإنجليزية. اضغط على الميكروفون وابدأ الحديث!",
+                encouragements: ["أحسنت! نطقك يتحسن.", "رائع! لنكمل.", "جملة جميلة! استمر.", "مجهود ممتاز!", "بداية جيدة، لنطورها أكثر."],
+                followUps: ["أخبرني عن هوايتك المفضلة.", "ماذا تناولت في الإفطار اليوم؟", "صف صديقك المقرب في بضع جمل.", "ما هي خططك لهذا الأسبوع؟", "أخبرني عن فيلم شاهدته مؤخراً.", "ما هو مكانك المفضل ولماذا؟"]
+            }
+        };
+
+        let currentVoiceLang = 'english';
+        let followUpIndex = 0;
+        let isListening = false;
+        let recognition = null;
+
+        const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        function initSpeechRecognition() {
+            if (!SpeechRecognitionAPI) {
+                document.getElementById('voiceSupportNote').textContent = '⚠️ Live voice input isn\'t supported in this browser. Please try Chrome on Android or Desktop — or just type your answers below, the bot will still reply out loud!';
+                document.getElementById('micBtn').style.opacity = '0.5';
+                document.getElementById('micBtn').style.cursor = 'not-allowed';
+                return;
+            }
+
+            recognition = new SpeechRecognitionAPI();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onstart = function() {
+                isListening = true;
+                document.getElementById('micBtn').classList.add('active');
+                document.getElementById('micIcon').textContent = '🔴';
+                document.getElementById('botAvatar').parentElement.classList.add('listening');
+                document.getElementById('botStatus').textContent = 'Listening... speak now';
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                addChatBubble('user', transcript);
+                botRespond(transcript);
+            };
+
+            recognition.onerror = function(event) {
+                document.getElementById('botStatus').textContent = 'Didn\'t catch that — tap the mic to try again';
+                stopListeningUI();
+            };
+
+            recognition.onend = function() {
+                stopListeningUI();
+            };
+        }
+
+        function stopListeningUI() {
+            isListening = false;
+            document.getElementById('micBtn').classList.remove('active');
+            document.getElementById('micIcon').textContent = '🎙️';
+            document.getElementById('botAvatar').parentElement.classList.remove('listening');
+        }
+
+        function toggleMic() {
+            if (!SpeechRecognitionAPI) {
+                alert('Voice input isn\'t supported in this browser. Please type your response instead, or try Chrome on Android/Desktop.');
+                return;
+            }
+            if (isListening) {
+                recognition.stop();
+            } else {
+                recognition.lang = voiceScripts[currentVoiceLang].code;
+                try {
+                    recognition.start();
+                } catch (e) {
+                    // recognition may already be running; ignore
+                }
+            }
+        }
+
+        function sendTypedMessage() {
+            const input = document.getElementById('chatTextInput');
+            const text = input.value.trim();
+            if (!text) return;
+            addChatBubble('user', text);
+            input.value = '';
+            botRespond(text);
+        }
+
+        function addChatBubble(sender, text) {
+            const transcript = document.getElementById('chatTranscript');
+            const bubble = document.createElement('div');
+            bubble.className = 'chat-bubble ' + sender;
+            const label = sender === 'bot' ? '🤖 AI Tutor' : '🧑 You';
+            bubble.innerHTML = '<div class="chat-label">' + label + '</div><div>' + text.replace(/</g, '&lt;') + '</div>';
+            transcript.appendChild(bubble);
+            transcript.scrollTop = transcript.scrollHeight;
+        }
+
+        function botRespond(userText) {
+            const script = voiceScripts[currentVoiceLang];
+            const encouragement = script.encouragements[Math.floor(Math.random() * script.encouragements.length)];
+            const followUp = script.followUps[followUpIndex % script.followUps.length];
+            followUpIndex++;
+
+            const reply = encouragement + ' ' + followUp;
+
+            setTimeout(function() {
+                addChatBubble('bot', reply);
+                speakText(reply, script.code);
+            }, 500);
+        }
+
+        function speakText(text, langCode) {
+            if (!window.speechSynthesis) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = langCode;
+            utterance.rate = 0.95;
+
+            utterance.onstart = function() {
+                document.getElementById('botAvatar').parentElement.classList.add('speaking');
+                document.getElementById('waveform').classList.add('active');
+                document.getElementById('botStatus').textContent = 'AI Tutor is speaking...';
+            };
+
+            utterance.onend = function() {
+                document.getElementById('botAvatar').parentElement.classList.remove('speaking');
+                document.getElementById('waveform').classList.remove('active');
+                document.getElementById('botStatus').textContent = 'Tap the mic to reply';
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function setVoiceLanguage(langKey, btnEl) {
+            currentVoiceLang = langKey;
+            followUpIndex = 0;
+
+            document.querySelectorAll('#voice .language-btn').forEach(b => b.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+
+            const script = voiceScripts[langKey];
+            document.getElementById('botStatus').textContent = 'Tap the mic to start talking';
+            addChatBubble('bot', script.greeting);
+            speakText(script.greeting, script.code);
+        }
+
+        function resetConversation() {
+            document.getElementById('chatTranscript').innerHTML = '';
+            followUpIndex = 0;
+            const script = voiceScripts[currentVoiceLang];
+            addChatBubble('bot', script.greeting);
+            document.getElementById('botStatus').textContent = 'Tap the mic to start talking';
+        }
+
+        // Initialize on load
+        initSpeechRecognition();
+
+        // ===== MY SCHOOL DATA & LOGIC =====
+        const schoolData = {
+            primary: {
+                1: ['Hindi', 'English', 'Mathematics', 'EVS'],
+                2: ['Hindi', 'English', 'Mathematics', 'EVS'],
+                3: ['Hindi', 'English', 'Mathematics', 'EVS'],
+                4: ['Hindi', 'English', 'Mathematics', 'EVS'],
+                5: ['Hindi', 'English', 'Mathematics', 'EVS']
+            },
+            secondary: {
+                6: ['Hindi', 'English', 'Mathematics', 'Science', 'History', 'Geography', 'Social Studies'],
+                7: ['Hindi', 'English', 'Mathematics', 'Science', 'History', 'Geography', 'Social Studies'],
+                8: ['Hindi', 'English', 'Mathematics', 'Science', 'History', 'Geography', 'Social Studies'],
+                9: ['Hindi', 'English', 'Mathematics', 'Science', 'History', 'Geography', 'Social Studies'],
+                10: ['Hindi', 'English', 'Mathematics', 'Science', 'History', 'Geography', 'Social Studies']
+            },
+            senior: {
+                science: ['Physics', 'Chemistry', 'Mathematics', 'Biology', 'English'],
+                commerce: ['Accountancy', 'Business Studies', 'Economics', 'Mathematics', 'English'],
+                arts: ['History', 'Political Science', 'Geography', 'Economics', 'Sociology', 'Psychology', 'English']
+            }
+        };
+
+        const subjectIcons = {
+            'Hindi': '🇮🇳', 'English': '🔤', 'Mathematics': '➗', 'EVS': '🌱', 'Science': '🔬',
+            'History': '📜', 'Geography': '🗺️', 'Social Studies': '🌍', 'Physics': '⚛️',
+            'Chemistry': '🧪', 'Biology': '🧬', 'Accountancy': '💰', 'Business Studies': '💼',
+            'Economics': '📈', 'Political Science': '🏛️', 'Sociology': '👥', 'Psychology': '🧠'
+        };
+
+        function chapterCount(subject, classNum) {
+            // Deterministic "chapter count" so numbers stay consistent between renders
+            return (subject.length * 3 + classNum * 2) % 12 + 8;
+        }
+
+        function showSchoolLevel(level, btnEl) {
+            document.querySelectorAll('.school-level-content').forEach(el => el.style.display = 'none');
+            const map = { primary: 'schoolPrimary', secondary: 'schoolSecondary', senior: 'schoolSenior' };
+            document.getElementById(map[level]).style.display = 'block';
+
+            document.querySelectorAll('.level-card').forEach(c => c.classList.remove('active-level'));
+            if (btnEl) btnEl.classList.add('active-level');
+
+            if (level === 'primary') selectClass('primary', 1, null);
+            if (level === 'secondary') selectClass('secondary', 6, null);
+            if (level === 'senior') selectStream('science', null);
+
+            document.getElementById(map[level]).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function selectClass(level, classNum, btnEl) {
+            const group = document.getElementById(level + 'ClassButtons');
+            if (group) {
+                group.querySelectorAll('.class-btn').forEach(b => b.classList.remove('active'));
+                if (btnEl) {
+                    btnEl.classList.add('active');
+                } else {
+                    const btns = group.querySelectorAll('.class-btn');
+                    if (btns.length) btns[0].classList.add('active');
+                }
+            }
+            renderSubjects(level, classNum, null);
+        }
+
+        function selectSeniorClass(classNum, btnEl) {
+            const group = document.getElementById('seniorClassButtons');
+            group.querySelectorAll('.class-btn').forEach(b => b.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+            const activeStreamBtn = document.querySelector('#seniorStreamButtons .stream-btn.active');
+            const stream = activeStreamBtn ? activeStreamBtn.textContent.trim().split(' ').slice(1).join(' ').toLowerCase() : 'science';
+            const streamKey = activeStreamBtn ? activeStreamBtn.getAttribute('data-stream') : 'science';
+            renderSubjects('senior', classNum, streamKey || 'science');
+        }
+
+        function selectStream(stream, btnEl) {
+            const group = document.getElementById('seniorStreamButtons');
+            group.querySelectorAll('.stream-btn').forEach(b => b.classList.remove('active'));
+            if (btnEl) {
+                btnEl.classList.add('active');
+            } else {
+                const btns = group.querySelectorAll('.stream-btn');
+                if (btns.length) btns[0].classList.add('active');
+            }
+            const activeClassBtn = document.querySelector('#seniorClassButtons .class-btn.active');
+            const classNum = activeClassBtn ? parseInt(activeClassBtn.textContent.replace('Class ', '')) : 11;
+            renderSubjects('senior', classNum, stream);
+        }
+
+        function renderSubjects(level, classNum, stream) {
+            let subjects = [];
+            let containerId = '';
+            let label = '';
+
+            if (level === 'primary') {
+                subjects = schoolData.primary[classNum];
+                containerId = 'primarySubjectsContainer';
+                label = 'Class ' + classNum;
+            } else if (level === 'secondary') {
+                subjects = schoolData.secondary[classNum];
+                containerId = 'secondarySubjectsContainer';
+                label = 'Class ' + classNum;
+            } else if (level === 'senior') {
+                subjects = schoolData.senior[stream] || schoolData.senior.science;
+                containerId = 'seniorSubjectsContainer';
+                const streamLabel = stream.charAt(0).toUpperCase() + stream.slice(1);
+                label = 'Class ' + classNum + ' — ' + streamLabel;
+            }
+
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            let html = '<h3 style="margin: 25px 0 15px 0;">📖 ' + label + ' Subjects</h3><div class="exam-category-grid">';
+            subjects.forEach(subj => {
+                const icon = subjectIcons[subj] || '📘';
+                const chapters = chapterCount(subj, classNum);
+                html += `
+                    <div class="exam-card" style="cursor: default;">
+                        <div class="exam-icon">${icon}</div>
+                        <h3>${subj}</h3>
+                        <div class="exam-details">Complete syllabus with notes & practice</div>
+                        <div class="exam-stats">
+                            <span class="stat-badge">${chapters} Chapters</span>
+                            <span class="stat-badge">Practice Papers</span>
+                        </div>
+                        <div class="paper-buttons">
+                            <button class="btn-primary" onclick="openSchoolSubjectQuiz('${subj}', 'practice')">Practice</button>
+                            <button class="btn-secondary" onclick="openSchoolSubjectQuiz('${subj}', 'review')">View Syllabus</button>
+                        </div>
+                    </div>`;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // Mark stream buttons with data-stream for reliable lookup
+        (function() {
+            const streamBtns = document.querySelectorAll('#seniorStreamButtons .stream-btn');
+            const keys = ['science', 'commerce', 'arts'];
+            streamBtns.forEach((btn, i) => btn.setAttribute('data-stream', keys[i]));
+        })();
+
+        // Initial render for Primary Class 1 (default visible view)
+        renderSubjects('primary', 1, null);
 
         function selectLanguage(lang) {
             const langs = {
